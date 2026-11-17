@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
+<title>Yoga Theory Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: single study column; topic grid on home, one card per question in quiz */
+:root{
+  --bg:#eef2ef; --surface:#ffffff; --ink:#1c2826; --muted:#5a6a66; --line:#d5ddd9;
+  --accent:#1e6b64; --accent-ink:#ffffff; --soft:#dcebe7; --gold:#c98a1e; --gold-soft:#f6ead2;
+  --good:#2b7a47; --good-soft:#dff0e4; --bad:#b0412f; --bad-soft:#f7e1dc;
+  --display:"Spectral",Georgia,"Times New Roman",serif; --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111816; --surface:#19221f; --ink:#e4ece9; --muted:#97a8a3; --line:#2b3835;
+  --accent:#5cc0b3; --accent-ink:#0d1a18; --soft:#1f3330; --gold:#e3ad4e; --gold-soft:#33291a;
+  --good:#6fc58c; --good-soft:#1b3324; --bad:#ea8473; --bad-soft:#3a201c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111816; --surface:#19221f; --ink:#e4ece9; --muted:#97a8a3; --line:#2b3835;
+  --accent:#5cc0b3; --accent-ink:#0d1a18; --soft:#1f3330; --gold:#e3ad4e; --gold-soft:#33291a;
+  --good:#6fc58c; --good-soft:#1b3324; --bad:#ea8473; --bad-soft:#3a201c; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:2rem}
+h2{font-size:1.5rem}
+.eyebrow{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.sk{font-family:var(--display);font-style:italic;color:var(--gold)}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:10px 14px;min-height:44px;text-align:left}
+button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{font-weight:600;text-align:center}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent}
+.link{background:none;border:0;padding:6px 0;min-height:0;color:var(--accent);font-weight:600}
+header.top{display:flex;flex-direction:column;gap:8px;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:22px}
+header.top p{color:var(--muted);max-width:60ch}
+.tests{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:26px}
+.test{display:flex;flex-direction:column;gap:4px;padding:16px;background:var(--accent);color:var(--accent-ink);border:0}
+.test.alt{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.test b{font-family:var(--display);font-size:1.2rem}
+.test span{font-size:.88rem;opacity:.85}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.topic{display:flex;flex-direction:column;gap:2px;padding:12px 14px}
+.topic:hover{border-color:var(--accent)}
+.topic .n{font-weight:600}
+.topic .s{font-family:var(--display);font-style:italic;color:var(--muted);font-size:.92rem}
+.topic .meta{display:flex;justify-content:space-between;gap:8px;font-size:.8rem;color:var(--muted);margin-top:6px}
+.chip{display:inline-block;padding:1px 8px;border-radius:99px;font-size:.78rem;font-weight:600;background:var(--soft);color:var(--accent)}
+.chip.gold{background:var(--gold-soft);color:var(--gold)}
+.notes{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.notes ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.notes li{max-width:68ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.qmeta{display:flex;justify-content:space-between;gap:10px;font-size:.85rem;color:var(--muted);flex-wrap:wrap}
+.q{font-size:1.15rem;font-weight:600;line-height:1.45}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt.correct{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--ink)}
+.opt[disabled]{cursor:default}
+.fb{border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.fb.good{background:var(--good-soft)}
+.fb.bad{background:var(--bad-soft)}
+.fb.neutral{background:var(--soft)}
+.fb strong{color:var(--ink)}
+.match{display:flex;flex-direction:column;gap:10px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:10px;align-items:center;padding:8px 10px;border-radius:10px;border:1px solid var(--line)}
+.mrow.correct{border-color:var(--good);background:var(--good-soft)}
+.mrow.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mrow .l{font-weight:600;min-width:0}
+.mrow .fix{grid-column:1/-1;font-size:.88rem;color:var(--bad)}
+select{font:inherit;width:100%;min-width:0;min-height:44px;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+@media (max-width:520px){.mrow{grid-template-columns:1fr}}
+.seq{display:flex;flex-direction:column;gap:6px;min-height:52px;padding:10px;border:1px dashed var(--line);border-radius:10px}
+.seq .ph{color:var(--muted);font-size:.9rem}
+.seqitem{display:flex;gap:10px;align-items:center}
+.seqitem em{font-style:normal;font-variant-numeric:tabular-nums;color:var(--muted);width:1.5em}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.reveal{border-left:3px solid var(--gold);padding:10px 14px;background:var(--gold-soft);border-radius:0 10px 10px 0}
+.big{font-family:var(--display);font-size:3rem;font-weight:700;line-height:1}
+.missed{display:flex;flex-direction:column;gap:10px}
+.missed div{padding:12px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-size:.95rem}
+.missed small{display:block;color:var(--muted);margin-bottom:2px}
+.foot{margin-top:28px;font-size:.82rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app"></div>
+
+<script>
+/* ---------- Question helpers: correct option is always written first ---------- */
+const mc=(q,o,x)=>({t:"mc",q,o,x});
+const match=(q,p,x)=>({t:"match",q,p,x});
+const order=(q,o,x)=>({t:"order",q,o,x});
+const recall=(q,a,x)=>({t:"recall",q,a,x});
+
+const TOPICS=[
+{id:"vayus",name:"5 types of prana",sk:"Pañca prāṇa vāyu",
+notes:[
+"Prana is the vital life force. In the body it moves as five <b>vayus</b> (winds), each with its own seat, direction and job.",
+"<b>Prana vayu</b>: chest and head. Moves inward. Intake of breath, food and impressions; the heart.",
+"<b>Apana vayu</b>: pelvis and lower abdomen. Moves downward and out. Elimination, menstruation, childbirth, exhalation.",
+"<b>Samana vayu</b>: navel. Moves from the edges to the centre. Digestion and assimilation; balances prana and apana.",
+"<b>Udana vayu</b>: throat. Moves upward. Speech, expression, growth, effort; said to carry consciousness out at death.",
+"<b>Vyana vayu</b>: the whole body. Moves from centre outward. Circulation, coordination, distribution."],
+qs:[
+mc("Which vayu is centred in the pelvis and moves downward?",["Apana","Prana","Udana","Samana"],"Apana governs everything that moves down and out: excretion, menstruation, childbirth."),
+mc("Which vayu is seated at the navel and governs digestion and assimilation?",["Samana","Vyana","Apana","Udana"],"Samana draws inward to the centre, like a digestive fire, and balances prana and apana."),
+mc("Which vayu pervades the whole body and governs circulation?",["Vyana","Prana","Samana","Udana"],"Vyana distributes energy outward to the periphery: circulation, nerve impulses, coordinated movement."),
+mc("Which vayu moves upward from the throat and governs speech?",["Udana","Prana","Vyana","Apana"],"Udana also rules growth and effort, and is traditionally said to lead consciousness out of the body at death."),
+mc("Prana vayu (the specific vayu, not prana in general) is seated mainly in the…",["Chest and head, moving inward","Pelvis, moving downward","Navel, moving to the centre","Whole body, moving outward"]),
+mc("“Vayu” literally means…",["Wind / air","Light","Channel","Seal"]),
+match("Match each vayu to its main function",[["Prana","Intake: inhaling, receiving"],["Apana","Elimination, downward flow"],["Samana","Digestion, assimilation"],["Udana","Speech, upward movement"],["Vyana","Circulation, distribution"]]),
+match("Match each vayu to its seat in the body",[["Prana","Chest / heart"],["Apana","Pelvis / lower abdomen"],["Samana","Navel"],["Udana","Throat"],["Vyana","Whole body"]]),
+recall("Name the five prana vayus.","Prana, Apana, Samana, Udana, Vyana.")
+]},
+
+{id:"viveka",name:"Viveka",sk:"Viveka",
+notes:[
+"<b>Viveka</b>: discrimination or discernment. The ability to tell the real from the unreal, the lasting from the passing.",
+"In the Yoga Sutras it is ultimately discernment between <b>Purusha</b> (the seer) and <b>Prakriti</b> (the seen). <i>Viveka-khyati</i> = discriminative awareness.",
+"<b>YS 2.26</b> <i>viveka-khyātir aviplavā hānopāyaḥ</i>: unwavering discernment is the means of removing ignorance (avidya).",
+"<b>YS 2.28</b>: practising the eight limbs destroys impurity, and the light of knowledge shines up to viveka-khyati.",
+"In Vedanta, viveka is the first of the four qualifications of a seeker (<i>sadhana chatushtaya</i>): viveka, vairagya, shat-sampat, mumukshutva. Shankara's <i>Vivekachudamani</i> means “crest jewel of discrimination”.",
+"It is the direct antidote to <b>avidya</b>, the root klesha."],
+qs:[
+mc("Viveka is best translated as…",["Discernment / discrimination","Non-attachment","Devotion","Concentration"]),
+mc("In the Yoga Sutras, viveka is ultimately the discernment between…",["Purusha and Prakriti (seer and seen)","Ida and Pingala","Pleasure and pain","Teacher and student"]),
+mc("YS 2.26 says unwavering viveka-khyati is the means of removing…",["Avidya (ignorance)","Tapas","The samskaras of practice","Prana"],"viveka-khyātir aviplavā hānopāyaḥ."),
+mc("YS 2.28: by practising the eight limbs, impurities dwindle and the light of knowledge shines up to…",["Viveka-khyati","Samyama","Pratyahara","Asana mastery"]),
+mc("Viveka is the direct antidote to which klesha?",["Avidya","Raga","Abhinivesha","Dvesha"],"Avidya is mistaking the non-Self for the Self. Viveka sees the difference."),
+recall("Viveka is the first of the four qualifications of a seeker in Vedanta (sadhana chatushtaya). Name all four.","Viveka (discernment), Vairagya (dispassion), Shat-sampat (the six virtues, such as calm and self-control), Mumukshutva (longing for liberation)."),
+recall("Give an everyday example of practising viveka.","Any example of telling the lasting from the passing, or self from not-self. For example, noticing “there is a thought of anger” rather than “I am angry”, or telling healthy stretch sensation from pain in a pose.")
+]},
+
+{id:"abhyasa",name:"Abhyasa",sk:"Abhyāsa",
+notes:[
+"<b>Abhyasa</b>: practice. Persistent, steady effort.",
+"<b>YS 1.12</b> <i>abhyāsa-vairāgyābhyāṁ tan-nirodhaḥ</i>: the fluctuations are stilled by practice and non-attachment.",
+"<b>YS 1.13</b> <i>tatra sthitau yatno 'bhyāsaḥ</i>: practice is the effort to become established in that steadiness.",
+"<b>YS 1.14</b> <i>sa tu dīrgha-kāla-nairantarya-satkāra-āsevito dṛḍha-bhūmiḥ</i>: it becomes firmly grounded when done for a long time, without interruption, and with devotion.",
+"Always paired with <b>vairagya</b> (non-attachment, YS 1.15-16). Often compared to the two wings of a bird."],
+qs:[
+mc("Abhyasa means…",["Practice","Non-attachment","Breath control","Self-study"]),
+mc("In YS 1.12, the vrittis are stilled by abhyasa and…",["Vairagya","Tapas","Pranayama","Bhakti"]),
+mc("YS 1.13 defines abhyasa as…",["The effort to be established in steadiness","Freedom from craving","Surrender to Ishvara","Withdrawal of the senses"]),
+mc("Vairagya, the partner of abhyasa, means…",["Non-attachment / dispassion","Discernment","Purity","Contentment"]),
+match("YS 1.14: match the Sanskrit to its meaning",[["Dirgha kala","For a long time"],["Nairantarya","Without interruption"],["Satkara","With devotion / sincere care"],["Dridha bhumi","Firmly grounded"]]),
+recall("Name the three conditions in YS 1.14 for practice to become firmly established.","For a long time (dirgha kala), without interruption (nairantarya), and with devotion and earnestness (satkara)."),
+recall("Why are abhyasa and vairagya taught together?","Practice gives direction and effort; non-attachment lets go of what pulls the mind away, including attachment to results. Effort without letting go becomes strain; letting go without effort becomes drift. Like two wings of a bird.")
+]},
+
+{id:"samskara",name:"Samskara",sk:"Saṁskāra",
+notes:[
+"<b>Samskara</b>: an impression left in the mind (chitta) by every action, thought and experience. <i>Sam</i> = together, <i>kara</i> = making.",
+"Repeated impressions deepen like grooves into habitual tendencies called <b>vasanas</b>.",
+"The cycle: a <b>vritti</b> (fluctuation) leaves a samskara, which produces new vrittis. Practice works by laying down new, helpful impressions.",
+"<b>YS 1.50</b>: the samskara born of samadhi-insight obstructs other samskaras.",
+"<b>YS 3.18</b>: by direct perception of samskaras comes knowledge of previous births.",
+"Linked to karma: actions leave samskaras that ripen later as tendencies and experiences."],
+qs:[
+mc("A samskara is…",["A subtle impression left in the mind by experience or action","A type of breath retention","An energy channel","One of the gunas"]),
+mc("Repeated samskaras that form deep habitual tendencies are called…",["Vasanas","Vrittis","Nadis","Kleshas"]),
+mc("In terms of samskara, why does steady practice change behaviour?",["It lays down new impressions that weaken old ones","It removes the gunas","It stops prana","It ends all karma at once"]),
+mc("YS 1.50 says the samskara born of samadhi-insight…",["Obstructs other samskaras","Creates new kleshas","Must be surrendered to a teacher","Arises only in sleep"]),
+mc("YS 3.18 says direct perception of samskaras brings…",["Knowledge of previous births","Freedom from hunger","Invisibility","Knowledge of the stars"]),
+recall("Describe the vritti-samskara cycle.","Each fluctuation of the mind (vritti) leaves an impression (samskara). Impressions shape future fluctuations, which leave more impressions, so habits form like grooves. Yoga practice interrupts and redirects the cycle.")
+]},
+
+{id:"dukkha",name:"Dukkha",sk:"Duḥkha",
+notes:[
+"<b>Dukkha</b>: suffering, pain, dissatisfaction. Traditional image: <i>du</i> (bad) + <i>kha</i> (space, the axle hole of a wheel), a wheel that doesn't run true. Its opposite is <b>sukha</b> (good space, ease).",
+"<b>YS 2.15</b>: to the discerning, all is dukkha, because of change, anxiety (tapa), samskaras and the conflict of the gunas.",
+"<b>YS 2.16</b> <i>heyaṁ duḥkham anāgatam</i>: suffering that has not yet come can be avoided.",
+"<b>YS 2.17</b> <i>draṣṭṛ-dṛśyayoḥ saṁyogo heya-hetuḥ</i>: its cause is the union (confusion) of the seer and the seen.",
+"<b>YS 2.26</b>: the remedy is unwavering viveka. The structure (the problem, its cause, its ending, the means) mirrors medicine and the Buddha's Four Noble Truths."],
+qs:[
+mc("Dukkha is usually translated as…",["Suffering / dissatisfaction","Bliss","Breath","Duty"]),
+mc("The traditional image behind du-kha is…",["A badly fitting axle hole in a wheel","A broken pot","A dark cave","A knot in a rope"]),
+mc("YS 2.16 “heyam duhkham anagatam” means…",["Suffering yet to come can be avoided","All life is suffering","Suffering is caused by the gunas","Suffering ends at death"]),
+mc("According to YS 2.17, the cause of avoidable suffering is…",["The union (confusion) of seer and seen","Bad karma from past lives","Weak prana","Too little asana practice"]),
+mc("The paired opposite of dukkha is…",["Sukha","Sattva","Samskara","Shanti"]),
+recall("YS 2.15 gives reasons why, to the discerning, all experience is dukkha. Name them.","Change or impermanence (parinama), anxiety or craving (tapa), habit impressions (samskara), and the conflicting movements of the gunas.")
+]},
+
+{id:"samyama",name:"Samyama",sk:"Saṁyama",
+notes:[
+"<b>Samyama</b>: “holding together”. Dharana, dhyana and samadhi practised together on one object. <b>YS 3.4</b> <i>trayam ekatra saṁyamaḥ</i>.",
+"Taught in Book 3, <b>Vibhuti Pada</b>.",
+"<b>YS 3.5</b>: by mastering it, the light of insight (<i>prajñā-āloka</i>) dawns. <b>3.6</b>: it is applied in stages.",
+"<b>3.7</b>: these three are inner limbs (antaranga) compared with the first five. <b>3.8</b>: yet outer compared with seedless (nirbija) samadhi.",
+"Samyama on different objects is said to produce <b>siddhis</b> (powers), for example on samskaras, knowledge of past lives (3.18). Patanjali warns these are obstacles to samadhi (3.37)."],
+qs:[
+mc("Samyama is the combined practice of…",["Dharana, dhyana and samadhi","Asana, pranayama and pratyahara","Yama, niyama and asana","Tapas, svadhyaya and Ishvara pranidhana"],"YS 3.4: trayam ekatra samyamah, “the three together on one object is samyama”. The last option is kriya yoga."),
+mc("Samyama is described in which book (pada) of the Yoga Sutras?",["Vibhuti Pada (3)","Samadhi Pada (1)","Sadhana Pada (2)","Kaivalya Pada (4)"]),
+mc("YS 3.5: by mastery of samyama…",["The light of insight (prajna) dawns","The body becomes weightless","The gunas disappear","The kleshas become active"]),
+mc("Patanjali says the powers (siddhis) that come from samyama are…",["Obstacles to samadhi, though they look like powers to the outward mind","The goal of yoga","Proof of liberation","Gifts to be shown to students"],"YS 3.37: te samādhāv upasargā vyutthāne siddhayaḥ."),
+order("Put the three parts of samyama in order, first to last.",["Dharana (concentration)","Dhyana (meditation)","Samadhi (absorption)"]),
+recall("What does the word samyama suggest, literally?","“Holding together” or “binding together” (sam = together, yama = holding / restraint): the three inner limbs held on a single object.")
+]},
+
+{id:"gunas",name:"Gunas",sk:"Guṇa",
+notes:[
+"The three <b>gunas</b> are the qualities, or strands, of Prakriti. Everything in nature, including the mind, is a mix of them.",
+"<b>Sattva</b>: clarity, light, balance, harmony, purity.",
+"<b>Rajas</b>: activity, passion, movement, restlessness, desire.",
+"<b>Tamas</b>: inertia, heaviness, darkness, dullness; also stability and rest.",
+"<b>YS 2.18</b> describes the seen as having the nature of illumination (<i>prakasha</i> = sattva), activity (<i>kriya</i> = rajas) and stability (<i>sthiti</i> = tamas).",
+"The <b>Bhagavad Gita</b> (ch. 14, also 17-18) applies the gunas to food, action and faith. The aim: cultivate sattva, then go beyond all three (<i>gunatita</i>)."],
+qs:[
+match("Match each guna to its quality",[["Sattva","Clarity, balance, light"],["Rajas","Activity, passion, restlessness"],["Tamas","Inertia, heaviness, dullness"]]),
+mc("The gunas are qualities of…",["Prakriti","Purusha","Only the physical body","Only Ishvara"]),
+mc("A restless, driven, can't-sit-still state of mind is mainly…",["Rajasic","Sattvic","Tamasic"]),
+mc("Fresh, light, wholesome food is traditionally classed as…",["Sattvic","Rajasic","Tamasic"]),
+mc("Stale, overcooked or reheated food is traditionally classed as…",["Tamasic","Sattvic","Rajasic"]),
+mc("Very spicy, stimulating food and lots of caffeine are traditionally classed as…",["Rajasic","Sattvic","Tamasic"]),
+mc("YS 2.18 describes the seen as prakasha, kriya and sthiti. These correspond to…",["Sattva, rajas, tamas","Tamas, rajas, sattva","Ida, pingala, sushumna","Body, mind, spirit"]),
+mc("Which text gives a whole chapter (ch. 14) to the three gunas?",["Bhagavad Gita","Hatha Yoga Pradipika","Yoga Sutras","Mandukya Upanishad"]),
+recall("Is tamas always “bad”? Explain.","No. Tamas also gives stability, grounding and rest; sleep needs it. Each guna has its place and problems come from imbalance. The aim is to increase sattva and ultimately go beyond all three (gunatita).")
+]},
+
+{id:"bandhas",name:"Bandhas",sk:"Bandha",
+notes:[
+"<b>Bandha</b>: lock, seal or bind. Used to direct and hold prana, classically with breath retention in pranayama.",
+"<b>Mula bandha</b>: root lock. A lift of the pelvic floor / perineum. Draws apana upward.",
+"<b>Uddiyana bandha</b>: “flying upward” lock. The abdomen drawn in and up under the ribs, classically after exhaling (empty lungs) on an empty stomach. Vinyasa practice often uses a lighter lower-belly engagement.",
+"<b>Jalandhara bandha</b>: throat lock (<i>jala</i> = net). Chin drawn toward the chest, sternum lifted. Stops prana escaping upward during retention.",
+"<b>Maha bandha</b>: the great lock, all three together.",
+"Described in the <b>Hatha Yoga Pradipika</b>, ch. 3, among the mudras.",
+"Avoid strong uddiyana and retention with pregnancy, high blood pressure, heart conditions, hernia, ulcers or a full stomach; traditionally also during menstruation."],
+qs:[
+match("Match each bandha to its location",[["Mula bandha","Pelvic floor / perineum"],["Uddiyana bandha","Abdomen, drawn in and up"],["Jalandhara bandha","Throat, chin toward chest"]]),
+mc("“Bandha” means…",["Lock / seal","Breath","Wheel","Channel"]),
+mc("All three main bandhas practised together is called…",["Maha bandha","Maha mudra","Sushumna bandha","Kevala kumbhaka"]),
+mc("Classically, full uddiyana bandha is practised…",["After exhaling, on empty lungs and an empty stomach","After a full inhale","Only lying down","During fast breathing"]),
+mc("Uddiyana literally means…",["Flying upward","Root","Net","Great"]),
+mc("Jalandhara bandha is used to…",["Stop prana escaping upward during retention","Push apana downward","Heat the navel","Open the crown"]),
+mc("Mula bandha draws which vayu upward?",["Apana","Udana","Vyana","Samana"],"Apana naturally moves down; mula bandha reverses it up toward the navel to meet prana."),
+mc("Which classic hatha text describes the bandhas among the mudras?",["Hatha Yoga Pradipika","Yoga Sutras","Katha Upanishad","Bhagavad Gita"]),
+recall("Give two contraindications for strong uddiyana bandha.","Any two of: pregnancy, high blood pressure, heart disease, hernia, stomach or intestinal ulcers, recent abdominal surgery, a full stomach; traditionally also during menstruation.")
+]},
+
+{id:"upanishads",name:"Upanishads",sk:"Upaniṣad",
+notes:[
+"<b>Upanishad</b>: <i>upa</i> (near) + <i>ni</i> (down) + <i>shad</i> (sit). “Sitting down near” a teacher to receive the inner teaching.",
+"The final, philosophical part of the Vedas, so also called <b>Vedanta</b> (“end of the Vedas”).",
+"Central teaching: <b>Atman</b> (the individual Self) is <b>Brahman</b> (ultimate reality).",
+"Traditionally <b>108</b> (the Muktika list); about 10-13 are principal: Isha, Kena, Katha, Prashna, Mundaka, Mandukya, Taittiriya, Aitareya, Chandogya, Brihadaranyaka, plus Svetasvatara.",
+"Great sayings (mahavakyas): <i>Tat tvam asi</i>, You are That (Chandogya); <i>Aham brahmasmi</i>, I am Brahman (Brihadaranyaka); <i>Prajnanam brahma</i> (Aitareya); <i>Ayam atma brahma</i> (Mandukya).",
+"<b>Katha</b>: Nachiketa meets Yama (death); the chariot image (body = chariot, senses = horses, mind = reins, intellect = charioteer, Self = passenger); yoga as the steady holding of the senses.",
+"<b>Taittiriya</b>: the five koshas. <b>Mandukya</b>: AUM and the four states. <b>Mundaka</b>: two birds on one tree. <b>Brihadaranyaka</b>: <i>asato mā sad gamaya</i>, lead me from the unreal to the real."],
+qs:[
+mc("“Upanishad” literally means…",["Sitting down near (the teacher)","Song of the Lord","Thread","Ancient story"],"Song of the Lord = Gita; thread = sutra; ancient story = Purana."),
+mc("The Upanishads are called Vedanta because they…",["Form the end (concluding part) of the Vedas","Came after the Buddha","Were written by Patanjali","Explain asana technique"]),
+mc("The central teaching of the Upanishads is that…",["Atman (the Self) is Brahman (ultimate reality)","Purusha and Prakriti are forever separate","The body must be purified with shatkarmas","The gods must be pleased with sacrifice"]),
+match("Match the Upanishad to its famous teaching",[["Katha","Nachiketa and Yama; the chariot image"],["Taittiriya","The five koshas"],["Mandukya","AUM and the four states of consciousness"],["Chandogya","Tat tvam asi (You are That)"]]),
+mc("In the Katha Upanishad chariot image, the horses represent…",["The senses","The mind","The body","The Self"]),
+mc("How many Upanishads are traditionally listed?",["108","4","196","18"]),
+recall("Name the four states of consciousness taught in the Mandukya Upanishad.","Waking (jagrat), dreaming (svapna), deep sleep (sushupti), and turiya, “the fourth”, pure consciousness underlying them all. They map to A, U, M and the silence after AUM."),
+recall("What is “Tat tvam asi” and where does it come from?","“You are That”, a mahavakya (great saying) from the Chandogya Upanishad, taught by Uddalaka to his son Shvetaketu. It points to the identity of Atman and Brahman.")
+]},
+
+{id:"koshas",name:"Koshas",sk:"Pañca kośa",
+notes:[
+"<b>Kosha</b>: sheath or layer. Five sheaths cover the Self, described in the <b>Taittiriya Upanishad</b>.",
+"<b>Annamaya</b>: food sheath, the physical body.",
+"<b>Pranamaya</b>: energy / breath sheath.",
+"<b>Manomaya</b>: mental and emotional sheath, the processing mind and senses.",
+"<b>Vijnanamaya</b>: wisdom sheath; intellect, discernment, insight.",
+"<b>Anandamaya</b>: bliss sheath.",
+"Three bodies: gross (<i>sthula</i>) = annamaya; subtle (<i>sukshma</i>) = pranamaya, manomaya, vijnanamaya; causal (<i>karana</i>) = anandamaya. The Self is beyond all five."],
+qs:[
+order("Put the five koshas in order, outermost to innermost.",["Annamaya","Pranamaya","Manomaya","Vijnanamaya","Anandamaya"]),
+match("Match each kosha to its meaning",[["Annamaya","Food / physical sheath"],["Pranamaya","Energy / breath sheath"],["Manomaya","Mental / emotional sheath"],["Vijnanamaya","Wisdom / intellect sheath"],["Anandamaya","Bliss sheath"]]),
+mc("“Kosha” means…",["Sheath / layer","Wheel","Knot","Wind"]),
+mc("The koshas are first described in which text?",["Taittiriya Upanishad","Yoga Sutras","Hatha Yoga Pradipika","Bhagavad Gita"]),
+mc("Which kosha is the seat of discernment, judgement and insight?",["Vijnanamaya","Manomaya","Pranamaya","Anandamaya"]),
+mc("Pranayama works most directly on which kosha?",["Pranamaya","Annamaya","Vijnanamaya","Anandamaya"]),
+match("Match each body (sharira) to its koshas",[["Sthula (gross body)","Annamaya"],["Sukshma (subtle body)","Pranamaya, Manomaya, Vijnanamaya"],["Karana (causal body)","Anandamaya"]]),
+recall("Is the Self (Atman) one of the koshas?","No. The koshas are coverings around the Self. The Self is the witness beyond all five, even the bliss sheath.")
+]},
+
+{id:"kleshas",name:"Kleshas",sk:"Kleśa",
+notes:[
+"<b>Klesha</b>: affliction, a cause of suffering. <b>YS 2.3</b> lists five:",
+"<b>Avidya</b> (ignorance, misperception), <b>Asmita</b> (I-am-ness, ego), <b>Raga</b> (attachment to pleasure), <b>Dvesha</b> (aversion to pain), <b>Abhinivesha</b> (clinging to life, fear of death).",
+"<b>YS 2.4</b>: avidya is the field for the others. They can be dormant (<i>prasupta</i>), thin (<i>tanu</i>), interrupted (<i>vicchinna</i>) or fully active (<i>udara</i>).",
+"<b>2.5</b> avidya: taking the impermanent as permanent, impure as pure, suffering as pleasure, non-Self as Self. <b>2.6</b> asmita: identifying the seer with the instrument of seeing. <b>2.7</b> raga follows pleasure. <b>2.8</b> dvesha follows pain. <b>2.9</b> abhinivesha flows by its own momentum, even in the wise.",
+"<b>2.1-2.2</b>: kriya yoga (tapas, svadhyaya, Ishvara pranidhana) weakens the kleshas. <b>2.10</b>: subtle forms are dissolved by tracing them back to their source; <b>2.11</b>: active forms by meditation."],
+qs:[
+order("Put the five kleshas in Patanjali's order (YS 2.3).",["Avidya","Asmita","Raga","Dvesha","Abhinivesha"]),
+match("Match each klesha to its meaning",[["Avidya","Ignorance, misperception"],["Asmita","I-am-ness, ego"],["Raga","Attachment to pleasure"],["Dvesha","Aversion to pain"],["Abhinivesha","Clinging to life, fear of death"]]),
+mc("“Klesha” means…",["Affliction / cause of suffering","Fluctuation","Impression","Discipline"]),
+mc("According to YS 2.4, which klesha is the field in which the others grow?",["Avidya","Asmita","Raga","Abhinivesha"]),
+match("YS 2.4: match each state a klesha can be in",[["Prasupta","Dormant"],["Tanu","Thin / weakened"],["Vicchinna","Interrupted / intermittent"],["Udara","Fully active"]]),
+mc("YS 2.9 says abhinivesha (clinging to life) is found…",["Even in the wise","Only in beginners","Only in animals","Only in old age"]),
+mc("YS 2.6 defines asmita as…",["Identifying the seer with the instrument of seeing","Following after pleasure","Taking the impermanent as permanent","Fear of death"]),
+mc("Which practice does Patanjali say (YS 2.1-2.2) weakens the kleshas?",["Kriya yoga: tapas, svadhyaya, Ishvara pranidhana","Hatha yoga: asana and pranayama","Samyama","Fasting"]),
+mc("YS 2.11: the active forms of the kleshas are removed by…",["Meditation (dhyana)","Asana","Fasting","Chanting"]),
+recall("YS 2.5 defines avidya as four kinds of mistake. Name them.","Taking the impermanent as permanent, the impure as pure, suffering (dukkha) as pleasure (sukha), and the non-Self as the Self.")
+]},
+
+{id:"purusha",name:"Purusha",sk:"Puruṣa",
+notes:[
+"<b>Purusha</b>: pure consciousness, the seer (<i>drashta</i>), the witness. Unchanging, eternal, inactive, not made of the gunas.",
+"From <b>Samkhya</b>, the dualist philosophy behind the Yoga Sutras: reality = Purusha + Prakriti. Samkhya holds there are many purushas.",
+"<b>YS 1.3</b> <i>tadā draṣṭuḥ svarūpe 'vasthānam</i>: then the seer rests in its own true nature.",
+"<b>YS 2.20</b>: the seer is pure seeing, yet appears to take on the colour of the mind.",
+"Confusing purusha with prakriti is the cause of suffering (2.17).",
+"<b>YS 1.24</b>: Ishvara is a special purusha, untouched by kleshas, karma, its results and latent impressions.",
+"The goal is <b>kaivalya</b>, the aloneness or independence of purusha (Book 4)."],
+qs:[
+mc("Purusha refers to…",["Pure consciousness, the seer","Matter and nature","The breath","The physical body"]),
+mc("Purusha and Prakriti come from which philosophy?",["Samkhya","Advaita Vedanta","Tantra","Buddhism"]),
+mc("YS 1.3 says that when the mind is still, the seer…",["Rests in its own true nature","Disappears","Becomes the mind","Gains siddhis"]),
+mc("In YS 1.24, Ishvara is described as…",["A special purusha untouched by kleshas, karma and its results","The first guna","The creator of prakriti","The breath of the universe"]),
+mc("Which statement about purusha is true?",["It is unchanging and not made of the gunas","It is made of sattva","It is the same as the intellect (buddhi)","It changes with every experience"]),
+mc("The final goal in Patanjali's system, the independence of purusha from prakriti, is…",["Kaivalya","Samyama","Nirvana","Pratyahara"]),
+recall("What is the difference between purusha and the mind?","The mind (chitta) is part of prakriti: it changes and is made of the gunas. Purusha is the unchanging awareness that witnesses the mind. Yoga stills the mind so the two are no longer confused.")
+]},
+
+{id:"prakriti",name:"Prakriti",sk:"Prakṛti",
+notes:[
+"<b>Prakriti</b>: nature, primordial matter. Everything that changes and can be known: the seen (<i>drishya</i>).",
+"Made of the three <b>gunas</b>; when they are in balance, prakriti is unmanifest.",
+"It includes the <b>mind</b>: buddhi (intellect), ahamkara (ego, the “I-maker”) and manas (sense mind), plus the senses and elements. Samkhya counts <b>24 tattvas</b> of prakriti; purusha is the 25th.",
+"<b>YS 2.18</b>: the seen exists for experience (<i>bhoga</i>) and liberation (<i>apavarga</i>). <b>2.21</b>: it exists for the sake of the seer.",
+"Prakriti is active but not conscious; purusha is conscious but not active. Samkhya compares them to a blind person who can walk carrying a lame person who can see."],
+qs:[
+mc("Prakriti refers to…",["Nature / matter, everything that changes","Pure consciousness","The Supreme God","Liberation"]),
+mc("In Samkhya-Yoga, the mind belongs to…",["Prakriti","Purusha","Neither","Ishvara"]),
+mc("YS 2.18 says the seen exists for the purpose of…",["Experience (bhoga) and liberation (apavarga)","Pleasure only","Punishment of past karma","Worship"]),
+mc("Prakriti is made up of…",["The three gunas","The five vayus","The five koshas","The eight limbs"]),
+mc("In Samkhya, prakriti unfolds into how many tattvas, with purusha as the 25th?",["24","5","8","108"]),
+match("Seer or seen? Match each to purusha or prakriti",[["Buddhi (intellect)","Prakriti"],["Pure awareness","Purusha"],["Ahamkara (ego)","Prakriti"],["The witness","Purusha"],["The breath","Prakriti"]]),
+recall("Use the Samkhya image of the blind person and the lame person to explain purusha and prakriti.","Prakriti is like a blind person who can walk: active but not conscious. Purusha is like a lame person who can see: conscious but not active. Together they move, and their apparent union produces experience.")
+]},
+
+{id:"yamas",name:"Yamas",sk:"Yama",
+notes:[
+"<b>YS 2.30</b>: the five yamas (restraints, how we relate to others): <b>Ahimsa</b> non-violence, <b>Satya</b> truthfulness, <b>Asteya</b> non-stealing, <b>Brahmacharya</b> moderation / right use of energy, <b>Aparigraha</b> non-possessiveness.",
+"<b>YS 2.31</b>: they are the <i>mahavratam</i>, the great vow, universal and not limited by birth, place, time or circumstance.",
+"<b>YS 2.33</b> <i>pratipakṣa-bhāvanam</i>: when disturbed by negative thoughts, cultivate the opposite.",
+"Fruits: <b>2.35</b> ahimsa, hostility falls away in their presence; <b>2.36</b> satya, actions and words bear fruit; <b>2.37</b> asteya, all jewels come; <b>2.38</b> brahmacharya, vigour (<i>virya</i>); <b>2.39</b> aparigraha, understanding of the how and why of birth."],
+qs:[
+order("Put the five yamas in the order of YS 2.30.",["Ahimsa","Satya","Asteya","Brahmacharya","Aparigraha"]),
+match("Match each yama to its meaning",[["Ahimsa","Non-violence"],["Satya","Truthfulness"],["Asteya","Non-stealing"],["Brahmacharya","Moderation / right use of energy"],["Aparigraha","Non-possessiveness, non-greed"]]),
+match("Match each yama to its fruit in the Yoga Sutras",[["Ahimsa (2.35)","Hostility falls away in their presence"],["Satya (2.36)","Actions and words bear fruit"],["Asteya (2.37)","All jewels / riches come"],["Brahmacharya (2.38)","Vigour and vitality"],["Aparigraha (2.39)","Understanding of the how and why of birth"]]),
+mc("YS 2.31 calls the yamas a “mahavratam”. This means…",["A great vow, universal, not limited by birth, place, time or circumstance","A rule only for monks","An optional practice for advanced students","A form of breath retention"]),
+mc("Which yama is often said to underlie all the others?",["Ahimsa","Asteya","Brahmacharya","Aparigraha"]),
+mc("Not taking more than you need, and not clinging to possessions, is…",["Aparigraha","Asteya","Santosha","Saucha"]),
+mc("YS 2.33 advises that when disturbed by negative thoughts you should…",["Cultivate the opposite (pratipaksha bhavana)","Suppress them","Do more asana","Stop practising the yamas"]),
+recall("Give a way to apply ahimsa when teaching an asana class.","Any reasonable example: offering modifications, never forcing students into poses, asking consent before assists, encouraging students to back off from pain, kind language, and not pushing through your own injuries.")
+]},
+
+{id:"niyamas",name:"Niyamas",sk:"Niyama",
+notes:[
+"<b>YS 2.32</b>: the five niyamas (observances, personal disciplines): <b>Saucha</b> purity, <b>Santosha</b> contentment, <b>Tapas</b> discipline / austerity (lit. heat), <b>Svadhyaya</b> self-study and study of sacred texts, <b>Ishvara pranidhana</b> surrender to the Lord / a higher power.",
+"The last three form <b>kriya yoga</b> (YS 2.1).",
+"Fruits: <b>2.40-41</b> saucha, detachment from the body, purity of mind, cheerfulness, one-pointedness, sense mastery; <b>2.42</b> santosha, supreme happiness; <b>2.43</b> tapas, perfection of body and senses; <b>2.44</b> svadhyaya, communion with one's chosen deity; <b>2.45</b> Ishvara pranidhana, samadhi."],
+qs:[
+order("Put the five niyamas in the order of YS 2.32.",["Saucha","Santosha","Tapas","Svadhyaya","Ishvara pranidhana"]),
+match("Match each niyama to its meaning",[["Saucha","Purity, cleanliness"],["Santosha","Contentment"],["Tapas","Discipline, austerity (heat)"],["Svadhyaya","Self-study, study of texts"],["Ishvara pranidhana","Surrender to a higher power"]]),
+match("Match each niyama to its fruit",[["Saucha (2.40-41)","Purity of mind, cheerfulness, sense mastery"],["Santosha (2.42)","Supreme happiness"],["Tapas (2.43)","Perfection of body and senses"],["Svadhyaya (2.44)","Communion with one's chosen deity"],["Ishvara pranidhana (2.45)","Attainment of samadhi"]]),
+mc("Which three niyamas make up kriya yoga (YS 2.1)?",["Tapas, svadhyaya, Ishvara pranidhana","Saucha, santosha, tapas","Ahimsa, satya, asteya","Santosha, svadhyaya, saucha"]),
+mc("Tapas literally relates to…",["Heat / burning","Water / flowing","Light","Sound"]),
+mc("According to YS 2.45, samadhi is attained through…",["Ishvara pranidhana","Santosha","Saucha","Svadhyaya"]),
+recall("What is the difference between the yamas and the niyamas?","Yamas are restraints: how we relate to others and the world. Niyamas are observances: personal disciplines toward ourselves.")
+]},
+
+{id:"limbs",name:"8 limbs",sk:"Aṣṭāṅga",
+notes:[
+"<b>YS 2.29</b> (Sadhana Pada): <i>yama niyama āsana prāṇāyāma pratyāhāra dhāraṇā dhyāna samādhayo 'ṣṭāv aṅgāni</i>.",
+"<b>Yama</b> restraints · <b>Niyama</b> observances · <b>Asana</b> posture / seat · <b>Pranayama</b> breath regulation · <b>Pratyahara</b> withdrawal of the senses · <b>Dharana</b> concentration · <b>Dhyana</b> meditation · <b>Samadhi</b> absorption.",
+"The first five are outer limbs (<i>bahiranga</i>); the last three are inner limbs (<i>antaranga</i>), together called samyama.",
+"Asana gets just three sutras (<b>2.46-2.48</b>). <b>2.49</b>: pranayama follows once asana is mastered. <b>2.54</b>: pratyahara, the senses withdraw from their objects.",
+"<b>3.1</b> dharana: binding the mind to one place. <b>3.2</b> dhyana: an unbroken flow of awareness toward it. <b>3.3</b> samadhi: only the object shines, as if empty of the self."],
+qs:[
+order("Put the eight limbs in order (YS 2.29).",["Yama","Niyama","Asana","Pranayama","Pratyahara","Dharana","Dhyana","Samadhi"]),
+match("Match each limb to its meaning",[["Yama","Restraints, ethics toward others"],["Niyama","Personal observances"],["Asana","Posture, seat"],["Pranayama","Regulation of breath / prana"],["Pratyahara","Withdrawal of the senses"],["Dharana","Concentration"],["Dhyana","Meditation"],["Samadhi","Absorption"]]),
+mc("Ashtanga literally means…",["Eight limbs","Eight breaths","Eight sutras","Eight teachers"]),
+mc("Which limbs are the antaranga (inner limbs)?",["Dharana, dhyana, samadhi","Yama, niyama, asana","Asana, pranayama, pratyahara","Pratyahara, dharana, dhyana"]),
+mc("Which limb is the bridge from outer to inner practice: withdrawing the senses from their objects?",["Pratyahara","Pranayama","Dharana","Dhyana"]),
+mc("How many sutras does Patanjali give to asana?",["Three (2.46-2.48)","Fifty","Twelve","None"]),
+mc("YS 3.1 defines dharana as…",["Binding the mind to one place or object","An unbroken flow of awareness","Absorption where only the object shines","Withdrawal of the senses"]),
+mc("YS 3.2 defines dhyana as…",["An uninterrupted flow of awareness toward the object","Fixing the mind on a point","Regulating the breath","The ethical restraints"]),
+mc("YS 2.49 says pranayama follows once…",["Asana is mastered","Samadhi is reached","The yamas are perfected","The chakras are open"]),
+recall("Which sutra lists the eight limbs, and in which pada is it?","YS 2.29, in Sadhana Pada (Book 2).")
+]},
+
+{id:"nadis",name:"Nadis",sk:"Nāḍī",
+notes:[
+"<b>Nadi</b>: channel, flow, river. Subtle channels that carry prana. Hatha texts commonly say there are <b>72,000</b>.",
+"<b>Ida</b>: left side, ends at the left nostril. Lunar (<i>chandra</i>), cooling, calming, receptive.",
+"<b>Pingala</b>: right side, ends at the right nostril. Solar (<i>surya</i>), heating, energising, active.",
+"<b>Sushumna</b>: the central channel along the spine, from Muladhara to the crown. Kundalini rises through it when ida and pingala are balanced.",
+"Ida and pingala spiral around sushumna, crossing at the chakras, and meet at <b>Ajna</b>.",
+"<b>Nadi shodhana</b> (alternate nostril breathing) purifies and balances the nadis. <i>Ha-tha</i> is often read as sun and moon: pingala and ida."],
+qs:[
+mc("“Nadi” means…",["Channel / flow / river","Wheel","Sheath","Knot"]),
+mc("Hatha texts commonly say there are how many nadis?",["72,000","108","7","3"]),
+match("Match each nadi to its qualities",[["Ida","Left, lunar, cooling, calming"],["Pingala","Right, solar, heating, energising"],["Sushumna","Central channel along the spine"]]),
+mc("Ida nadi ends at the…",["Left nostril","Right nostril","Crown of the head","Navel"]),
+mc("Pingala is associated with…",["The sun, heat and activity","The moon, coolness and rest","Space and stillness","Earth and grounding"]),
+mc("Ida and pingala spiral around the spine and meet at which chakra?",["Ajna","Anahata","Manipura","Vishuddha"]),
+mc("When ida and pingala are balanced, prana is said to flow into…",["Sushumna","Muladhara","Apana","Vyana"]),
+mc("Which pranayama is named for purifying the nadis?",["Nadi shodhana (alternate nostril)","Kapalabhati","Bhastrika","Ujjayi"]),
+mc("In one common reading, “Ha” and “Tha” in hatha yoga stand for…",["Sun and moon (pingala and ida)","Inhale and exhale","Body and mind","Effort and ease"]),
+recall("Name the three principal nadis and where each runs.","Ida (left, lunar), Pingala (right, solar), Sushumna (central, along the spine).")
+]},
+
+{id:"chakras",name:"Chakras (6 main)",sk:"Ṣaṭ cakra",
+notes:[
+"<b>Chakra</b>: wheel. Energy centres along sushumna, pictured as lotuses. Classic source: the <i>Sat-chakra-nirupana</i> (1577), which describes six chakras with Sahasrara above them.",
+"<b>Muladhara</b> (root support): base of spine / perineum · earth · 4 petals · LAM · grounding, survival. Kundalini sleeps here.",
+"<b>Svadhisthana</b> (one's own seat): pelvis, below the navel · water · 6 petals · VAM · creativity, pleasure, emotion.",
+"<b>Manipura</b> (city of jewels): navel / solar plexus · fire · 10 petals · RAM · willpower, digestion, confidence.",
+"<b>Anahata</b> (unstruck): heart · air · 12 petals · YAM · love, compassion.",
+"<b>Vishuddha</b> (especially pure): throat · space / ether · 16 petals · HAM · communication, expression.",
+"<b>Ajna</b> (command, perceive): between the eyebrows · mind (beyond the elements) · 2 petals · OM · intuition, insight. Ida and pingala meet here.",
+"<b>Sahasrara</b> (thousand-petalled) at the crown sits above the six. Rainbow colours (red to indigo/violet) are a modern Western addition."],
+qs:[
+order("Put the six main chakras in order from the base upward.",["Muladhara","Svadhisthana","Manipura","Anahata","Vishuddha","Ajna"]),
+match("Match each chakra to its location",[["Muladhara","Base of spine / perineum"],["Svadhisthana","Pelvis, below the navel"],["Manipura","Navel / solar plexus"],["Anahata","Heart"],["Vishuddha","Throat"],["Ajna","Between the eyebrows"]]),
+match("Match each chakra to its element",[["Muladhara","Earth"],["Svadhisthana","Water"],["Manipura","Fire"],["Anahata","Air"],["Vishuddha","Space / ether"],["Ajna","Mind (beyond the elements)"]]),
+match("Match each chakra to its bija (seed) mantra",[["Muladhara","LAM"],["Svadhisthana","VAM"],["Manipura","RAM"],["Anahata","YAM"],["Vishuddha","HAM"],["Ajna","OM"]]),
+match("Match each chakra to its number of petals",[["Muladhara","4"],["Svadhisthana","6"],["Manipura","10"],["Anahata","12"],["Vishuddha","16"],["Ajna","2"]]),
+match("Match each chakra to the meaning of its name",[["Muladhara","Root support"],["Svadhisthana","One's own seat"],["Manipura","City of jewels"],["Anahata","Unstruck (sound)"],["Vishuddha","Especially pure"],["Ajna","Command / perceive"]]),
+mc("Chakra literally means…",["Wheel","Lotus","Lock","Channel"]),
+mc("Which chakra is linked with willpower, digestion and fire?",["Manipura","Svadhisthana","Anahata","Muladhara"]),
+mc("Which chakra is linked with communication and self-expression?",["Vishuddha","Ajna","Anahata","Manipura"]),
+mc("Why is Sahasrara often not counted among the “six chakras”?",["It sits above them, the seat of pure consciousness beyond the body's centres","It was invented in the 20th century","It has no petals","It belongs to the nadis instead"]),
+recall("Where does kundalini lie dormant, and where does it rise to?","Coiled at Muladhara, the base of the spine. It rises through sushumna, piercing the chakras, to Sahasrara at the crown.")
+]},
+
+{id:"sutras",name:"Sutras 1.1, 1.2, 2.46",sk:"Yoga Sūtra",
+notes:[
+"<b>1.1</b> <i>atha yogānuśāsanam</i>. “Now, the teaching of yoga [begins].” <i>Atha</i> = now: an auspicious start, implying the student is prepared and ready. <i>Anu</i> (following) + <i>śāsanam</i> (instruction): teaching handed down through a lineage.",
+"<b>1.2</b> <i>yogaś citta-vṛtti-nirodhaḥ</i>. “Yoga is the stilling of the fluctuations of the mind.” <i>Chitta</i> = mind-field (manas, buddhi, ahamkara); <i>vritti</i> = fluctuations, whirlings, modifications; <i>nirodha</i> = stilling, restraint, cessation.",
+"Context: <b>1.3</b> then the seer rests in its own nature; <b>1.4</b> otherwise it identifies with the fluctuations; <b>1.6</b> the five vrittis: right knowledge, error, imagination, sleep, memory.",
+"<b>2.46</b> <i>sthira-sukham āsanam</i>. “Posture should be steady and comfortable.” <i>Sthira</i> = steady, firm, stable; <i>sukha</i> = ease, comfort, joy; <i>asana</i> = seat, posture.",
+"Context: <b>2.47</b> by relaxing effort and meditating on the infinite; <b>2.48</b> then one is undisturbed by the pairs of opposites (<i>dvandvas</i>).",
+"The Yoga Sutras: about 196 sutras in four padas: Samadhi (1), Sadhana (2), Vibhuti (3), Kaivalya (4)."],
+qs:[
+match("Match each sutra to its Sanskrit",[["1.1","Atha yoganushasanam"],["1.2","Yogash chitta vritti nirodhah"],["2.46","Sthira sukham asanam"]]),
+match("YS 1.1: match each word to its meaning",[["Atha","Now (an auspicious beginning)"],["Yoga","Yoga, union"],["Anushasanam","Teaching, instruction handed down"]]),
+match("YS 1.2: match each word to its meaning",[["Chitta","Mind, mind-field, consciousness"],["Vritti","Fluctuations, modifications"],["Nirodha","Stilling, restraint, cessation"]]),
+match("YS 2.46: match each word to its meaning",[["Sthira","Steady, stable, firm"],["Sukha","Comfortable, at ease, joyful"],["Asana","Seat, posture"]]),
+mc("Which sutra says “Yoga is the stilling of the fluctuations of the mind”?",["1.2","1.1","2.46","1.3"]),
+mc("A common translation of YS 1.1 is…",["Now, the teaching of yoga [begins]","Yoga is the stilling of the mind","Posture should be steady and comfortable","Then the seer rests in its own nature"]),
+mc("Translate “sthira sukham asanam” (2.46).",["Posture should be steady and comfortable","Asana should be practised daily","Practise for a long time without a break","The body is a temple"]),
+mc("“Atha” in YS 1.1 suggests…",["Now: readiness and an auspicious start, after preparation","The end of the teaching","Ancient wisdom","A prayer to Ishvara"]),
+mc("In which pada is sutra 2.46?",["Sadhana Pada","Samadhi Pada","Vibhuti Pada","Kaivalya Pada"]),
+mc("Chitta in YS 1.2 includes…",["Manas, buddhi and ahamkara: the whole mind-field","Only the thinking mind","Only memories","The breath and the body"]),
+mc("YS 2.47 says posture is perfected by…",["Relaxing effort and meditating on the infinite","Holding it longer each day","Using props","Strong bandhas"]),
+mc("YS 2.48 says that from mastery of asana comes…",["Freedom from disturbance by the pairs of opposites","Siddhis","Knowledge of past lives","Freedom from all karma"]),
+mc("How many padas (books) are in the Yoga Sutras?",["Four","Eight","Two","Six"]),
+recall("Write YS 1.1 in Sanskrit and translate it.","Atha yogānuśāsanam. “Now, the teaching (instruction) of yoga [begins].”"),
+recall("Write YS 1.2 in Sanskrit and translate it.","Yogaś citta-vṛtti-nirodhaḥ. “Yoga is the stilling (nirodha) of the fluctuations (vritti) of the mind (chitta).”"),
+recall("Write YS 2.46 in Sanskrit and translate it.","Sthira-sukham āsanam. “Posture (asana) should be steady (sthira) and comfortable (sukha).”"),
+recall("Name the five vrittis (YS 1.6).","Pramana (right knowledge), viparyaya (error), vikalpa (imagination / verbal delusion), nidra (sleep), smriti (memory).")
+]}
+];
+
+/* ---------- Utilities ---------- */
+const $=s=>document.querySelector(s);
+const app=$("#app");
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const best=()=>store.get("ytr-best",{});
+const topicById=id=>TOPICS.find(t=>t.id===id);
+const typeLabel={mc:"Multiple choice",match:"Matching",order:"Put in order",recall:"Recall"};
+
+let S=null;
+
+/* ---------- Home ---------- */
+function home(){
+  S=null;
+  const b=best();
+  const total=TOPICS.reduce((n,t)=>n+t.qs.length,0);
+  app.innerHTML=`
+  <header class="top">
+    <span class="eyebrow">Teacher training · theory revision</span>
+    <h1>Yoga Theory Revision</h1>
+    <p>${total} questions across ${TOPICS.length} topics. Pick a topic to read the key facts and practise, or test yourself across everything.</p>
+  </header>
+  <div class="tests">
+    <button class="test" id="full"><b>Full mock test</b><span>2 questions from every topic · ${TOPICS.length*2} questions</span></button>
+    <button class="test alt" id="quick"><b>Quick mix</b><span>15 random questions from anywhere</span></button>
+  </div>
+  <div class="stack">
+    <span class="eyebrow">Topics</span>
+    <div class="grid">${TOPICS.map(t=>`
+      <button class="topic" data-id="${t.id}">
+        <span class="n">${esc(t.name)}</span>
+        <span class="s">${t.sk}</span>
+        <span class="meta"><span>${t.qs.length} questions</span>${b[t.id]!=null?`<span class="chip ${b[t.id]>=80?"":"gold"}">Best ${b[t.id]}%</span>`:""}</span>
+      </button>`).join("")}
+    </div>
+  </div>
+  <p class="foot">Sources: Patanjali's Yoga Sutras, the principal Upanishads, Hatha Yoga Pradipika and Sat-chakra-nirupana. Translations vary between teachers, so check wording against your course manual. Best scores are saved in this browser only.</p>`;
+  $("#full").onclick=()=>start("Full mock test",shuffle(TOPICS.flatMap(t=>shuffle(t.qs).slice(0,2).map(q=>({q,t})))));
+  $("#quick").onclick=()=>start("Quick mix",shuffle(TOPICS.flatMap(t=>t.qs.map(q=>({q,t})))).slice(0,15));
+  app.querySelectorAll(".topic").forEach(el=>el.onclick=()=>topicPage(el.dataset.id));
+  window.scrollTo(0,0);
+}
+
+/* ---------- Topic page ---------- */
+function topicPage(id){
+  const t=topicById(id);
+  app.innerHTML=`
+  <div class="stack">
+    <button class="link" id="back">← All topics</button>
+    <div><span class="sk">${t.sk}</span><h2>${esc(t.name)}</h2></div>
+    <div class="notes"><span class="eyebrow">Key facts</span><ul style="margin-top:10px">${t.notes.map(n=>`<li>${n}</li>`).join("")}</ul></div>
+    <div class="row"><button class="btn primary" id="go">Practise ${t.qs.length} questions</button><button class="btn ghost" id="back2">Back</button></div>
+  </div>`;
+  $("#back").onclick=home;$("#back2").onclick=home;
+  $("#go").onclick=()=>start(t.name,shuffle(t.qs).map(q=>({q,t})),t.id);
+  window.scrollTo(0,0);
+}
+
+/* ---------- Quiz engine ---------- */
+function start(title,items,topicId){
+  S={title,items,i:0,score:0,results:[],topicId};
+  render();
+}
+function render(){
+  const {q,t}=S.items[S.i];
+  const n=S.items.length;
+  app.innerHTML=`
+  <div class="stack">
+    <div class="row" style="justify-content:space-between"><button class="link" id="quit">← Leave test</button><span class="eyebrow">${esc(S.title)}</span></div>
+    <div class="progress"><i style="width:${(S.i/n)*100}%"></i></div>
+    <div class="card">
+      <div class="qmeta"><span>Question ${S.i+1} of ${n} · ${typeLabel[q.t]}</span><span>${esc(t.name)} · Score ${S.score}</span></div>
+      <div class="q">${esc(q.q)}</div>
+      <div id="body"></div>
+      <div id="fb"></div>
+    </div>
+  </div>`;
+  $("#quit").onclick=()=>S.topicId?topicPage(S.topicId):home();
+  ({mc:renderMC,match:renderMatch,order:renderOrder,recall:renderRecall})[q.t](q);
+  window.scrollTo(0,0);
+}
+function finish(ok,html){
+  S.results.push({item:S.items[S.i],ok});
+  if(ok)S.score++;
+  const fb=$("#fb");
+  fb.innerHTML=`<div class="fb ${ok===null?"neutral":ok?"good":"bad"}">${html||""}</div>
+  <div class="row" style="margin-top:12px"><button class="btn primary" id="next">${S.i+1<S.items.length?"Next question":"See results"}</button></div>`;
+  $("#next").onclick=()=>{S.i++;S.i<S.items.length?render():results()};
+  $("#next").focus({preventScroll:true});
+}
+const expl=q=>q.x?`<span>${esc(q.x)}</span>`:"";
+
+function renderMC(q){
+  const correct=q.o[0];
+  const opts=shuffle(q.o);
+  $("#body").innerHTML=`<div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>`;
+  const btns=[...document.querySelectorAll(".opt")];
+  btns.forEach(b=>b.onclick=()=>{
+    const pick=opts[+b.dataset.k];const ok=pick===correct;
+    btns.forEach(x=>{x.disabled=true;if(opts[+x.dataset.k]===correct)x.classList.add("correct")});
+    if(!ok)b.classList.add("wrong");
+    finish(ok,`<strong>${ok?"Correct.":"Not quite. The answer is: "+esc(correct)}</strong>${expl(q)}`);
+  });
+}
+
+function renderMatch(q){
+  const rights=shuffle([...new Set(q.p.map(p=>p[1]))]);
+  const rows=shuffle(q.p);
+  $("#body").innerHTML=`<div class="match">${rows.map((p,k)=>`
+    <div class="mrow" data-k="${k}"><span class="l">${esc(p[0])}</span>
+    <select id="m-${S.i}-${k}" aria-label="Match for ${esc(p[0])}"><option value="">Choose…</option>${rights.map(r=>`<option value="${esc(r)}">${esc(r)}</option>`).join("")}</select></div>`).join("")}
+  </div><div class="row" style="margin-top:14px"><button class="btn primary" id="check">Check answers</button><span id="warn" class="eyebrow" hidden>Fill every row first</span></div>`;
+  $("#check").onclick=()=>{
+    const sels=[...document.querySelectorAll(".mrow select")];
+    if(sels.some(s=>!s.value)){$("#warn").hidden=false;return}
+    let right=0;
+    rows.forEach((p,k)=>{
+      const row=document.querySelector(`.mrow[data-k="${k}"]`);const s=sels[k];s.disabled=true;
+      if(s.value===p[1]){right++;row.classList.add("correct")}
+      else{row.classList.add("wrong");row.insertAdjacentHTML("beforeend",`<span class="fix">Answer: ${esc(p[1])}</span>`)}
+    });
+    $("#check").parentElement.remove();
+    const ok=right===rows.length;
+    finish(ok,`<strong>${ok?"All matched.":`${right} of ${rows.length} matched.`}</strong>${ok?"":"<span>Corrections are shown under each row.</span>"}${expl(q)}`);
+  };
+}
+
+function renderOrder(q){
+  const pool=shuffle(q.o);const seq=[];
+  const draw=()=>{
+    $("#body").innerHTML=`
+    <div class="seq" id="seq">${seq.length?seq.map((s,k)=>`<button class="seqitem" data-k="${k}"><em>${k+1}</em>${esc(s)}</button>`).join(""):`<span class="ph">Tap the items below in the right order. Tap a placed item to remove it.</span>`}</div>
+    <div class="pool" style="margin-top:12px">${pool.filter(p=>!seq.includes(p)).map(p=>`<button class="pitem" data-v="${esc(p)}">${esc(p)}</button>`).join("")}</div>
+    <div class="row" style="margin-top:14px"><button class="btn primary" id="check" ${seq.length<q.o.length?"disabled":""}>Check order</button>${seq.length?`<button class="btn ghost" id="reset">Start again</button>`:""}</div>`;
+    document.querySelectorAll(".pitem").forEach(b=>b.onclick=()=>{seq.push(b.dataset.v);draw()});
+    document.querySelectorAll(".seqitem").forEach(b=>b.onclick=()=>{seq.splice(+b.dataset.k,1);draw()});
+    if($("#reset"))$("#reset").onclick=()=>{seq.length=0;draw()};
+    $("#check").onclick=check;
+  };
+  const check=()=>{
+    const items=[...document.querySelectorAll(".seqitem")];
+    let right=0;
+    seq.forEach((s,k)=>{items[k].disabled=true;if(s===q.o[k]){right++;items[k].classList.add("opt","correct")}else items[k].classList.add("opt","wrong")});
+    $("#check").parentElement.remove();
+    const ok=right===q.o.length;
+    finish(ok,`<strong>${ok?"Perfect order.":`${right} of ${q.o.length} in the right place.`}</strong>${ok?"":`<span>Correct order: ${q.o.map(esc).join(" → ")}</span>`}${expl(q)}`);
+  };
+  draw();
+}
+
+function renderRecall(q){
+  $("#body").innerHTML=`<p style="color:var(--muted)">Say or write your answer, then reveal it and mark yourself honestly.</p>
+  <div class="row" style="margin-top:12px"><button class="btn primary" id="show">Show answer</button></div>`;
+  $("#show").onclick=()=>{
+    $("#body").innerHTML=`<div class="reveal">${esc(q.a)}</div>
+    <div class="row" style="margin-top:12px"><button class="btn primary" id="got">I got it</button><button class="btn" id="miss">Not yet</button></div>`;
+    $("#got").onclick=()=>{$("#body .row").remove();finish(true,`<strong>Marked as known.</strong>${expl(q)}`)};
+    $("#miss").onclick=()=>{$("#body .row").remove();finish(false,`<strong>Marked for review.</strong> It will show in your missed list at the end.${expl(q)}`)};
+  };
+}
+
+/* ---------- Results ---------- */
+function answerText(q){
+  if(q.t==="mc")return q.o[0];
+  if(q.t==="recall")return q.a;
+  if(q.t==="order")return q.o.join(" → ");
+  return q.p.map(p=>`${p[0]}: ${p[1]}`).join(" · ");
+}
+function results(){
+  const n=S.items.length;const pct=Math.round(S.score/n*100);
+  if(S.topicId){const b=best();if(b[S.topicId]==null||pct>b[S.topicId]){b[S.topicId]=pct;store.set("ytr-best",b)}}
+  const missed=S.results.filter(r=>!r.ok).map(r=>r.item);
+  const byTopic={};S.results.forEach(r=>{const k=r.item.t.name;byTopic[k]=byTopic[k]||[0,0];byTopic[k][1]++;if(r.ok)byTopic[k][0]++});
+  const weak=S.topicId?[]:Object.entries(byTopic).filter(([k,v])=>v[0]<v[1]).map(([k])=>k);
+  const msg=pct>=90?"Exam ready on this.":pct>=70?"Solid. Go over the missed ones below.":pct>=50?"Getting there. Reread the key facts, then retry.":"Worth another read of the key facts first.";
+  app.innerHTML=`
+  <div class="stack">
+    <span class="eyebrow">${esc(S.title)} · results</span>
+    <div class="card">
+      <div class="row" style="gap:18px"><span class="big">${pct}%</span><div><strong>${S.score} of ${n} correct</strong><p style="color:var(--muted)">${msg}</p></div></div>
+      ${weak.length?`<div><span class="eyebrow">Topics to revisit</span><div class="row" style="margin-top:6px">${weak.map(w=>`<span class="chip gold">${esc(w)}</span>`).join("")}</div></div>`:""}
+      <div class="row">${missed.length?`<button class="btn primary" id="retry">Retry the ${missed.length} missed</button>`:""}<button class="btn ${missed.length?"":"primary"}" id="again">Take it again</button><button class="btn ghost" id="home">All topics</button></div>
+    </div>
+    ${missed.length?`<span class="eyebrow">What you missed</span><div class="missed">${missed.map(m=>`<div><small>${esc(m.t.name)} · ${typeLabel[m.q.t]}</small><strong>${esc(m.q.q)}</strong><br>${esc(answerText(m.q))}</div>`).join("")}</div>`:""}
+  </div>`;
+  const items=S.items,title=S.title,tid=S.topicId;
+  if($("#retry"))$("#retry").onclick=()=>start(title+" · retry",shuffle(missed),tid);
+  $("#again").onclick=()=>{
+    if(tid)start(title,shuffle(topicById(tid).qs).map(q=>({q,t:topicById(tid)})),tid);
+    else if(title.startsWith("Full"))$("#home").click(),$("#full").click();
+    else $("#home").click(),$("#quick").click();
+  };
+  $("#home").onclick=home;
+  window.scrollTo(0,0);
+}
+
+home();
+</script>
+</body>
+</html>
