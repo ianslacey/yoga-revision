@@ -70,6 +70,7 @@ header.top p{color:var(--muted);max-width:60ch}
 .progress i{display:block;height:100%;background:var(--accent);transition:width .25s}
 .qmeta{display:flex;justify-content:space-between;gap:10px;font-size:.85rem;color:var(--muted);flex-wrap:wrap}
 .q{font-size:1.15rem;font-weight:600;line-height:1.45}
+.ctx{color:var(--muted);font-size:.95rem;margin-top:-8px;max-width:60ch}
 .opts{display:flex;flex-direction:column;gap:8px}
 .opt.correct{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
 .opt.wrong{background:var(--bad-soft);border-color:var(--bad);color:var(--ink)}
@@ -112,6 +113,7 @@ const match=(q,p,x)=>({t:"match",q,p,x});
 const order=(q,o,x)=>({t:"order",q,o,x});
 const recall=(q,a,x)=>({t:"recall",q,a,x});
 
+const C=(c,q)=>(q.c=c,q);
 const TOPICS=[
 {id:"vayus",name:"5 types of prana",sk:"Prāṇa vāyu",
 notes:[
@@ -122,12 +124,12 @@ notes:[
 "<b>Udana</b>: throat. Upward. Speech, expression.",
 "<b>Vyana</b>: the whole body. Outward. Circulation."],
 qs:[
-recall("Name the five types of prana (vayus).","Prana, Apana, Samana, Udana, Vyana."),
-match("Match each vayu to its area of the body",[["Prana","Chest and head"],["Apana","Pelvis"],["Samana","Navel"],["Udana","Throat"],["Vyana","Whole body"]]),
-mc("Which vayu moves downward and governs elimination?",["Apana","Prana","Udana","Vyana"]),
-mc("Which vayu governs digestion?",["Samana","Apana","Udana","Vyana"]),
-mc("Which vayu is linked to speech and moves upward?",["Udana","Samana","Apana","Prana"]),
-mc("Which vayu moves through the whole body and governs circulation?",["Vyana","Prana","Samana","Udana"])
+C("Prana, the life force, is said to move through the body as five “winds”, each with its own direction and job.",recall("Name the five types of prana (vayus).","Prana, Apana, Samana, Udana, Vyana.")),
+C("Each vayu is centred in a different region of the body.",match("Match each vayu to its area of the body",[["Prana","Chest and head"],["Apana","Pelvis"],["Samana","Navel"],["Udana","Throat"],["Vyana","Whole body"]])),
+C("The vayus are the five movements of prana, each flowing in its own direction.",mc("Which vayu moves downward and governs elimination?",["Apana","Prana","Udana","Vyana"])),
+C("Each vayu has a job; this one turns what we take in into nourishment.",mc("Which vayu governs digestion?",["Samana","Apana","Udana","Vyana"])),
+C("This vayu is also linked with growth, effort and self-expression.",mc("Which vayu is linked to speech and moves upward?",["Udana","Samana","Apana","Prana"])),
+C("This vayu connects and coordinates the whole system, like a network.",mc("Which vayu moves through the whole body and governs circulation?",["Vyana","Prana","Samana","Udana"]))
 ]},
 
 {id:"viveka",name:"Viveka",sk:"Viveka",
@@ -137,10 +139,10 @@ notes:[
 "In yoga philosophy it means telling the true Self (Purusha) apart from the changing body and mind (Prakriti).",
 "It is the cure for ignorance (avidya)."],
 qs:[
-mc("Viveka means…",["Discernment","Practice","Non-violence","Contentment"]),
-mc("Viveka is the ability to tell apart…",["The real from the unreal","Inhale from exhale","Left from right","Sattva from rajas"]),
-mc("In yoga philosophy, viveka is seeing the difference between…",["Purusha (the Self) and Prakriti (nature)","Ida and Pingala","Yama and Niyama","The koshas"]),
-recall("In one sentence, what is viveka?","Discernment: the ability to tell the real, lasting Self from what is changing and temporary.")
+C("A quality that yoga philosophy says is the cure for ignorance (avidya).",mc("Viveka means…",["Discernment","Practice","Non-violence","Contentment"])),
+C("Viveka is the mind's ability to judge clearly and cut through confusion.",mc("Viveka is the ability to tell apart…",["The real from the unreal","Inhale from exhale","Left from right","Sattva from rajas"])),
+C("Samkhya-yoga describes reality as two principles, and says suffering comes from confusing them.",mc("In yoga philosophy, viveka is seeing the difference between…",["Purusha (the Self) and Prakriti (nature)","Ida and Pingala","Yama and Niyama","The koshas"])),
+C("A key quality in yoga philosophy, said to be the cure for ignorance (avidya).",recall("In one sentence, what is viveka?","Discernment: the ability to tell the real, lasting Self from what is changing and temporary."))
 ]},
 
 {id:"abhyasa",name:"Abhyasa",sk:"Abhyāsa",
@@ -149,10 +151,10 @@ notes:[
 "It works best when done for a long time, without breaks, and with care and dedication.",
 "It is paired with <b>vairagya</b> (non-attachment). Practice and letting go work together to calm the mind."],
 qs:[
-mc("Abhyasa means…",["Practice","Discernment","Purity","Breath control"]),
-mc("Abhyasa is traditionally paired with…",["Vairagya (non-attachment)","Viveka (discernment)","Tapas (discipline)","Pranayama (breathwork)"]),
-mc("Practice becomes firmly established when it is done…",["For a long time, without breaks, with dedication","Only when you feel like it","Fast and hard for a short time","Only with a teacher present"]),
-recall("What does abhyasa mean, and what is it paired with?","Abhyasa is practice (steady, consistent effort). It is paired with vairagya, non-attachment.")
+C("One of the two methods Patanjali gives for stilling the fluctuations of the mind.",mc("Abhyasa means…",["Practice","Discernment","Purity","Breath control"])),
+C("Patanjali names two methods that work together to still the mind, often compared to the two wings of a bird.",mc("Abhyasa is traditionally paired with…",["Vairagya (non-attachment)","Viveka (discernment)","Tapas (discipline)","Pranayama (breathwork)"])),
+C("Patanjali says practice needs three conditions to take root.",mc("Practice becomes firmly established when it is done…",["For a long time, without breaks, with dedication","Only when you feel like it","Fast and hard for a short time","Only with a teacher present"])),
+C("One of a pair of methods for stilling the mind, like the two wings of a bird.",recall("What does abhyasa mean, and what is it paired with?","Abhyasa is practice (steady, consistent effort). It is paired with vairagya, non-attachment."))
 ]},
 
 {id:"samskara",name:"Samskara",sk:"Saṁskāra",
@@ -161,10 +163,10 @@ notes:[
 "Repeated, they become habits and patterns, like grooves worn into a path.",
 "Yoga practice helps us notice old samskaras and create new, healthier ones."],
 qs:[
-mc("A samskara is…",["An impression left in the mind by actions and experiences","A type of breathing","An energy centre","A yoga posture"]),
-mc("Repeating the same samskara over and over creates…",["Habits and patterns","Prana","Chakras","Bandhas"]),
-mc("How does yoga practice work with samskaras?",["It helps form new, positive impressions","It deletes them instantly","It has nothing to do with them","It makes them stronger"]),
-recall("Explain samskara in your own words.","An impression or imprint left in the mind by what we do and experience. Repeated, they form habits and patterns that shape how we act.")
+C("The word comes from “sam” (together) and “kara” (action or making).",mc("A samskara is…",["An impression left in the mind by actions and experiences","A type of breathing","An energy centre","A yoga posture"])),
+C("Samskaras build up in the mind over a lifetime of experience.",mc("Repeating the same samskara over and over creates…",["Habits and patterns","Prana","Chakras","Bandhas"])),
+C("Samskaras can be helpful or unhelpful, and they are not fixed.",mc("How does yoga practice work with samskaras?",["It helps form new, positive impressions","It deletes them instantly","It has nothing to do with them","It makes them stronger"])),
+C("A key idea in yoga psychology, from “sam” (together) and “kara” (making).",recall("Explain samskara in your own words.","An impression or imprint left in the mind by what we do and experience. Repeated, they form habits and patterns that shape how we act."))
 ]},
 
 {id:"dukkha",name:"Dukkha",sk:"Duḥkha",
@@ -174,10 +176,10 @@ notes:[
 "Its opposite is <b>sukha</b>: ease, happiness.",
 "Yoga teaches that much future suffering can be avoided."],
 qs:[
-mc("Dukkha means…",["Suffering / dissatisfaction","Happiness","Breath","Practice"]),
-mc("The opposite of dukkha is…",["Sukha","Sattva","Samskara","Satya"]),
-mc("The traditional image behind “dukkha” is…",["A badly fitting wheel","A closed door","A storm","A broken pot"]),
-recall("What is dukkha, and what is its opposite?","Dukkha is suffering or dissatisfaction. Its opposite is sukha, ease or happiness.")
+C("A key word in both the Yoga Sutras and Buddhism; the Buddha's first noble truth is about it.",mc("Dukkha means…",["Suffering / dissatisfaction","Happiness","Breath","Practice"])),
+C("Dukkha has a partner word that describes the opposite state.",mc("The opposite of dukkha is…",["Sukha","Sattva","Samskara","Satya"])),
+C("The word is built from “du” (bad) and “kha” (space or hole).",mc("The traditional image behind “dukkha” is…",["A badly fitting wheel","A closed door","A storm","A broken pot"])),
+C("A key word in the Yoga Sutras and Buddhism, often met when asking why we practise.",recall("What is dukkha, and what is its opposite?","Dukkha is suffering or dissatisfaction. Its opposite is sukha, ease or happiness."))
 ]},
 
 {id:"samyama",name:"Samyama",sk:"Saṁyama",
@@ -185,9 +187,9 @@ notes:[
 "<b>Samyama</b> is the last three limbs practised together on one object:",
 "<b>Dharana</b> (concentration) → <b>Dhyana</b> (meditation) → <b>Samadhi</b> (absorption)."],
 qs:[
-mc("Samyama is the combination of…",["Dharana, dhyana and samadhi","Yama, niyama and asana","Asana, pranayama and pratyahara","Ida, pingala and sushumna"]),
-order("Put the three parts of samyama in order.",["Dharana (concentration)","Dhyana (meditation)","Samadhi (absorption)"]),
-recall("What is samyama?","Practising dharana (concentration), dhyana (meditation) and samadhi (absorption) together on one object.")
+C("Samyama means “holding together”, and is taught in the third book of the Yoga Sutras.",mc("Samyama is the combination of…",["Dharana, dhyana and samadhi","Yama, niyama and asana","Asana, pranayama and pratyahara","Ida, pingala and sushumna"])),
+C("The last three limbs are practised together, each deepening the one before.",order("Put the three parts of samyama in order.",["Dharana (concentration)","Dhyana (meditation)","Samadhi (absorption)"])),
+C("Taught in Book 3 of the Yoga Sutras; the name means “holding together”.",recall("What is samyama?","Practising dharana (concentration), dhyana (meditation) and samadhi (absorption) together on one object."))
 ]},
 
 {id:"gunas",name:"Gunas",sk:"Guṇa",
@@ -198,11 +200,11 @@ notes:[
 "<b>Tamas</b>: inertia, heaviness, dullness; also rest and stability.",
 "Yoga aims to increase sattva."],
 qs:[
-recall("Name the three gunas.","Sattva, Rajas, Tamas."),
-match("Match each guna to its quality",[["Sattva","Balance, clarity"],["Rajas","Activity, restlessness"],["Tamas","Inertia, heaviness"]]),
-mc("Feeling restless and unable to sit still is mostly…",["Rajas","Sattva","Tamas"]),
-mc("Feeling sluggish, heavy and unmotivated is mostly…",["Tamas","Sattva","Rajas"]),
-mc("Which guna does yoga practice aim to increase?",["Sattva","Rajas","Tamas"])
+C("In yoga and Ayurveda, everything in nature is a mix of three qualities.",recall("Name the three gunas.","Sattva, Rajas, Tamas.")),
+C("Each guna is a different quality, seen in food, moods and even times of day.",match("Match each guna to its quality",[["Sattva","Balance, clarity"],["Rajas","Activity, restlessness"],["Tamas","Inertia, heaviness"]])),
+C("Each guna shows up in how the mind feels from moment to moment.",mc("Feeling restless and unable to sit still is mostly…",["Rajas","Sattva","Tamas"])),
+C("Our mood shifts between the three gunas through the day.",mc("Feeling sluggish, heavy and unmotivated is mostly…",["Tamas","Sattva","Rajas"])),
+C("Practice, diet and lifestyle can all tip the balance of the three gunas.",mc("Which guna does yoga practice aim to increase?",["Sattva","Rajas","Tamas"]))
 ]},
 
 {id:"bandhas",name:"Bandhas",sk:"Bandha",
@@ -213,11 +215,11 @@ notes:[
 "<b>Jalandhara bandha</b>: throat lock, chin drawn towards the chest.",
 "<b>Maha bandha</b>: all three together."],
 qs:[
-mc("Bandha means…",["Lock / seal","Breath","Wheel","Channel"]),
-match("Match each bandha to where it is",[["Mula bandha","Pelvic floor"],["Uddiyana bandha","Abdomen"],["Jalandhara bandha","Throat"]]),
-mc("All three bandhas held together are called…",["Maha bandha","Mula bandha","Samyama","Pranayama"]),
-mc("Jalandhara bandha involves…",["Drawing the chin towards the chest","Lifting the pelvic floor","Drawing the belly in and up","Pressing the hands into the floor"]),
-recall("Name the three main bandhas.","Mula bandha (root lock), Uddiyana bandha (abdominal lock), Jalandhara bandha (throat lock).")
+C("Used in asana and pranayama, and described in the Hatha Yoga Pradipika.",mc("Bandha means…",["Lock / seal","Breath","Wheel","Channel"])),
+C("Each bandha engages a different part of the body.",match("Match each bandha to where it is",[["Mula bandha","Pelvic floor"],["Uddiyana bandha","Abdomen"],["Jalandhara bandha","Throat"]])),
+C("The three main bandhas can be held one at a time or all at once.",mc("All three bandhas held together are called…",["Maha bandha","Mula bandha","Samyama","Pranayama"])),
+C("“Jala” means net; this bandha is often used during breath retention.",mc("Jalandhara bandha involves…",["Drawing the chin towards the chest","Lifting the pelvic floor","Drawing the belly in and up","Pressing the hands into the floor"])),
+C("Bandhas are used to hold and direct prana, especially in pranayama.",recall("Name the three main bandhas.","Mula bandha (root lock), Uddiyana bandha (abdominal lock), Jalandhara bandha (throat lock)."))
 ]},
 
 {id:"upanishads",name:"Upanishads",sk:"Upaniṣad",
@@ -228,10 +230,10 @@ notes:[
 "Their main teaching: the individual Self (<b>Atman</b>) is one with ultimate reality (<b>Brahman</b>).",
 "The five koshas come from one of them, the Taittiriya Upanishad."],
 qs:[
-mc("“Upanishad” means…",["Sitting down near (a teacher)","Eight limbs","Song of God","Lock"]),
-mc("The Upanishads are the final part of…",["The Vedas","The Yoga Sutras","The Bhagavad Gita","The Hatha Yoga Pradipika"]),
-mc("The main teaching of the Upanishads is that…",["Atman (the Self) is one with Brahman (ultimate reality)","The body must be strong","Asana is the goal of yoga","The gunas are bad"]),
-recall("What are the Upanishads?","Ancient philosophical texts, the final part of the Vedas (Vedanta). Their main teaching is that the Self (Atman) is one with ultimate reality (Brahman).")
+C("The name describes how these teachings were originally received.",mc("“Upanishad” means…",["Sitting down near (a teacher)","Eight limbs","Song of God","Lock"])),
+C("They are among the oldest spiritual texts of India, around 2,500 years old or more.",mc("The Upanishads are the final part of…",["The Vedas","The Yoga Sutras","The Bhagavad Gita","The Hatha Yoga Pradipika"])),
+C("They explore the nature of the self and of the universe.",mc("The main teaching of the Upanishads is that…",["Atman (the Self) is one with Brahman (ultimate reality)","The body must be strong","Asana is the goal of yoga","The gunas are bad"])),
+C("Ancient texts from India, studied for thousands of years, and the source of the koshas.",recall("What are the Upanishads?","Ancient philosophical texts, the final part of the Vedas (Vedanta). Their main teaching is that the Self (Atman) is one with ultimate reality (Brahman)."))
 ]},
 
 {id:"koshas",name:"Koshas",sk:"Kośa",
@@ -243,11 +245,11 @@ notes:[
 "<b>Vijnanamaya</b>: wisdom / intellect body.",
 "<b>Anandamaya</b>: bliss body."],
 qs:[
-order("Put the five koshas in order, outer to inner.",["Annamaya","Pranamaya","Manomaya","Vijnanamaya","Anandamaya"]),
-match("Match each kosha to its meaning",[["Annamaya","Physical body"],["Pranamaya","Energy / breath"],["Manomaya","Mind and emotions"],["Vijnanamaya","Wisdom / intellect"],["Anandamaya","Bliss"]]),
-mc("Kosha means…",["Sheath / layer","Wheel","Lock","Channel"]),
-mc("Breathwork works most directly on which kosha?",["Pranamaya","Annamaya","Anandamaya","Vijnanamaya"]),
-mc("Which is the innermost kosha?",["Anandamaya","Annamaya","Manomaya","Pranamaya"])
+C("The koshas are often pictured like the layers of an onion around the true Self.",order("Put the five koshas in order, outer to inner.",["Annamaya","Pranamaya","Manomaya","Vijnanamaya","Anandamaya"])),
+C("Each sheath is named after what it is “made of” (-maya means “made of”).",match("Match each kosha to its meaning",[["Annamaya","Physical body"],["Pranamaya","Energy / breath"],["Manomaya","Mind and emotions"],["Vijnanamaya","Wisdom / intellect"],["Anandamaya","Bliss"]])),
+C("The Taittiriya Upanishad describes five of these around the true Self.",mc("Kosha means…",["Sheath / layer","Wheel","Lock","Channel"])),
+C("Different practices reach different layers: asana, breath, meditation and so on.",mc("Breathwork works most directly on which kosha?",["Pranamaya","Annamaya","Anandamaya","Vijnanamaya"])),
+C("The koshas go from the most physical on the outside to the most subtle at the centre.",mc("Which is the innermost kosha?",["Anandamaya","Annamaya","Manomaya","Pranamaya"]))
 ]},
 
 {id:"kleshas",name:"Kleshas",sk:"Kleśa",
@@ -259,11 +261,11 @@ notes:[
 "<b>Dvesha</b>: aversion to pain.",
 "<b>Abhinivesha</b>: fear of death, clinging to life."],
 qs:[
-recall("Name the five kleshas.","Avidya, Asmita, Raga, Dvesha, Abhinivesha."),
-match("Match each klesha to its meaning",[["Avidya","Ignorance"],["Asmita","Ego"],["Raga","Attachment"],["Dvesha","Aversion"],["Abhinivesha","Fear of death"]]),
-mc("Kleshas are…",["Causes of suffering","Energy channels","Types of breath","Ethical rules"]),
-mc("Which klesha is the root of all the others?",["Avidya","Raga","Dvesha","Asmita"]),
-mc("Clinging to things we enjoy is…",["Raga","Dvesha","Asmita","Abhinivesha"])
+C("Patanjali lists five of these in Book 2 of the Yoga Sutras.",recall("Name the five kleshas.","Avidya, Asmita, Raga, Dvesha, Abhinivesha.")),
+C("Each klesha is a different way the mind causes us suffering.",match("Match each klesha to its meaning",[["Avidya","Ignorance"],["Asmita","Ego"],["Raga","Attachment"],["Dvesha","Aversion"],["Abhinivesha","Fear of death"]])),
+C("Patanjali lists five of them, and much of yoga practice aims to weaken them.",mc("Kleshas are…",["Causes of suffering","Energy channels","Types of breath","Ethical rules"])),
+C("Patanjali says one klesha is the field in which all the others grow.",mc("Which klesha is the root of all the others?",["Avidya","Raga","Dvesha","Asmita"])),
+C("Two of the kleshas are opposite pulls: towards what we like and away from what we dislike.",mc("Clinging to things we enjoy is…",["Raga","Dvesha","Asmita","Abhinivesha"]))
 ]},
 
 {id:"purusha",name:"Purusha",sk:"Puruṣa",
@@ -272,10 +274,10 @@ notes:[
 "It is the opposite partner of Prakriti (nature, everything that changes).",
 "When the mind is still, we experience our true nature as Purusha."],
 qs:[
-mc("Purusha is…",["Pure consciousness, the true Self","Matter and nature","The physical body","A type of breath"]),
-mc("Purusha is often called…",["The seer / witness","The seen","The doer","The breath"]),
-mc("Which statement about Purusha is true?",["It never changes","It is made of the gunas","It is the same as the mind","It is the physical body"]),
-recall("What is Purusha?","Pure consciousness: the unchanging true Self that witnesses everything.")
+C("In Samkhya philosophy, one of the two basic principles that make up reality.",mc("Purusha is…",["Pure consciousness, the true Self","Matter and nature","The physical body","A type of breath"])),
+C("Purusha is one half of the Samkhya pair, alongside Prakriti.",mc("Purusha is often called…",["The seer / witness","The seen","The doer","The breath"])),
+C("Purusha is contrasted with Prakriti, the world of nature and matter.",mc("Which statement about Purusha is true?",["It never changes","It is made of the gunas","It is the same as the mind","It is the physical body"])),
+C("One of the two principles of Samkhya philosophy, the partner of Prakriti.",recall("What is Purusha?","Pure consciousness: the unchanging true Self that witnesses everything."))
 ]},
 
 {id:"prakriti",name:"Prakriti",sk:"Prakṛti",
@@ -285,11 +287,11 @@ notes:[
 "It is made up of the three <b>gunas</b>.",
 "Purusha is the seer; Prakriti is the seen."],
 qs:[
-mc("Prakriti is…",["Nature / matter, everything that changes","Pure consciousness","The true Self","Liberation"]),
-mc("Prakriti is made up of…",["The three gunas","The five koshas","The eight limbs","The five kleshas"]),
-mc("Does the mind belong to Purusha or Prakriti?",["Prakriti","Purusha"]),
-match("Purusha or Prakriti?",[["The body","Prakriti"],["The witness","Purusha"],["Thoughts","Prakriti"],["Pure awareness","Purusha"]]),
-recall("What is the difference between Purusha and Prakriti?","Purusha is pure, unchanging consciousness (the seer). Prakriti is nature and matter, everything that changes, including body and mind (the seen).")
+C("In Samkhya philosophy, one of the two basic principles that make up reality, the partner of Purusha.",mc("Prakriti is…",["Nature / matter, everything that changes","Pure consciousness","The true Self","Liberation"])),
+C("Everything in nature, including body and mind, shares the same basic ingredients.",mc("Prakriti is made up of…",["The three gunas","The five koshas","The eight limbs","The five kleshas"])),
+C("In Samkhya, everything that changes belongs to one side of the pair.",mc("Does the mind belong to Purusha or Prakriti?",["Prakriti","Purusha"])),
+C("Samkhya sorts everything into one of these two categories.",match("Purusha or Prakriti?",[["The body","Prakriti"],["The witness","Purusha"],["Thoughts","Prakriti"],["Pure awareness","Purusha"]])),
+C("The two principles of Samkhya philosophy, which underpins the Yoga Sutras.",recall("What is the difference between Purusha and Prakriti?","Purusha is pure, unchanging consciousness (the seer). Prakriti is nature and matter, everything that changes, including body and mind (the seen)."))
 ]},
 
 {id:"yamas",name:"Yamas",sk:"Yama",
@@ -301,11 +303,11 @@ notes:[
 "<b>Brahmacharya</b>: moderation, wise use of energy.",
 "<b>Aparigraha</b>: non-greed, non-possessiveness."],
 qs:[
-recall("Name the five yamas.","Ahimsa, Satya, Asteya, Brahmacharya, Aparigraha."),
-match("Match each yama to its meaning",[["Ahimsa","Non-violence"],["Satya","Truthfulness"],["Asteya","Non-stealing"],["Brahmacharya","Moderation"],["Aparigraha","Non-greed"]]),
-mc("Ahimsa means…",["Non-violence","Truthfulness","Contentment","Purity"]),
-mc("Not taking more than you need is…",["Aparigraha","Satya","Saucha","Tapas"]),
-mc("The yamas are mainly about…",["How we treat others and the world","Breathing techniques","Postures","Meditation"])
+C("The yamas are the first of Patanjali's eight limbs.",recall("Name the five yamas.","Ahimsa, Satya, Asteya, Brahmacharya, Aparigraha.")),
+C("The yamas are ethical guidelines for how we treat others and the world.",match("Match each yama to its meaning",[["Ahimsa","Non-violence"],["Satya","Truthfulness"],["Asteya","Non-stealing"],["Brahmacharya","Moderation"],["Aparigraha","Non-greed"]])),
+C("Gandhi made this yama central to his life and politics.",mc("Ahimsa means…",["Non-violence","Truthfulness","Contentment","Purity"])),
+C("This yama is about our relationship with possessions.",mc("Not taking more than you need is…",["Aparigraha","Satya","Saucha","Tapas"])),
+C("The yamas are the first of Patanjali's eight limbs.",mc("The yamas are mainly about…",["How we treat others and the world","Breathing techniques","Postures","Meditation"]))
 ]},
 
 {id:"niyamas",name:"Niyamas",sk:"Niyama",
@@ -317,11 +319,11 @@ notes:[
 "<b>Svadhyaya</b>: self-study, study of texts.",
 "<b>Ishvara pranidhana</b>: surrender to a higher power."],
 qs:[
-recall("Name the five niyamas.","Saucha, Santosha, Tapas, Svadhyaya, Ishvara pranidhana."),
-match("Match each niyama to its meaning",[["Saucha","Cleanliness"],["Santosha","Contentment"],["Tapas","Discipline"],["Svadhyaya","Self-study"],["Ishvara pranidhana","Surrender to a higher power"]]),
-mc("Santosha means…",["Contentment","Cleanliness","Truthfulness","Discipline"]),
-mc("Svadhyaya means…",["Self-study","Surrender","Non-stealing","Concentration"]),
-mc("What is the difference between yamas and niyamas?",["Yamas are about how we treat others; niyamas are about how we treat ourselves","They are the same thing","Yamas are postures; niyamas are breathing","Niyamas come first"])
+C("The niyamas are the second of the eight limbs.",recall("Name the five niyamas.","Saucha, Santosha, Tapas, Svadhyaya, Ishvara pranidhana.")),
+C("The niyamas are personal practices for how we treat ourselves.",match("Match each niyama to its meaning",[["Saucha","Cleanliness"],["Santosha","Contentment"],["Tapas","Discipline"],["Svadhyaya","Self-study"],["Ishvara pranidhana","Surrender to a higher power"]])),
+C("One of the five niyamas, the second limb of yoga.",mc("Santosha means…",["Contentment","Cleanliness","Truthfulness","Discipline"])),
+C("One of the five niyamas, the personal observances.",mc("Svadhyaya means…",["Self-study","Surrender","Non-stealing","Concentration"])),
+C("The first two of the eight limbs are both ethical guidelines.",mc("What is the difference between yamas and niyamas?",["Yamas are about how we treat others; niyamas are about how we treat ourselves","They are the same thing","Yamas are postures; niyamas are breathing","Niyamas come first"]))
 ]},
 
 {id:"limbs",name:"8 limbs",sk:"Aṣṭāṅga",
@@ -329,12 +331,12 @@ notes:[
 "Patanjali's eight limbs of yoga (<i>ashtanga</i>), in order:",
 "<b>Yama</b> ethical restraints · <b>Niyama</b> personal observances · <b>Asana</b> posture · <b>Pranayama</b> breath control · <b>Pratyahara</b> withdrawal of the senses · <b>Dharana</b> concentration · <b>Dhyana</b> meditation · <b>Samadhi</b> absorption / bliss."],
 qs:[
-order("Put the eight limbs in order.",["Yama","Niyama","Asana","Pranayama","Pratyahara","Dharana","Dhyana","Samadhi"]),
-match("Match each limb to its meaning",[["Yama","Ethical restraints"],["Niyama","Personal observances"],["Asana","Posture"],["Pranayama","Breath control"],["Pratyahara","Withdrawal of the senses"],["Dharana","Concentration"],["Dhyana","Meditation"],["Samadhi","Absorption"]]),
-mc("Ashtanga means…",["Eight limbs","Eight breaths","Eight postures","Eight chakras"]),
-mc("Which limb is withdrawal of the senses?",["Pratyahara","Pranayama","Dharana","Dhyana"]),
-mc("Which limb comes straight after asana?",["Pranayama","Pratyahara","Niyama","Dharana"]),
-recall("Name the eight limbs in order.","Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi.")
+C("Patanjali's eight limbs move from outward behaviour to inner states.",order("Put the eight limbs in order.",["Yama","Niyama","Asana","Pranayama","Pratyahara","Dharana","Dhyana","Samadhi"])),
+C("Together the eight limbs form Patanjali's path from the Yoga Sutras.",match("Match each limb to its meaning",[["Yama","Ethical restraints"],["Niyama","Personal observances"],["Asana","Posture"],["Pranayama","Breath control"],["Pratyahara","Withdrawal of the senses"],["Dharana","Concentration"],["Dhyana","Meditation"],["Samadhi","Absorption"]])),
+C("Patanjali's system from the Yoga Sutras, and also the name of a modern style of yoga.",mc("Ashtanga means…",["Eight limbs","Eight breaths","Eight postures","Eight chakras"])),
+C("This limb sits between the outer limbs and the inner ones.",mc("Which limb is withdrawal of the senses?",["Pratyahara","Pranayama","Dharana","Dhyana"])),
+C("The limbs build on each other, from the body towards the mind.",mc("Which limb comes straight after asana?",["Pranayama","Pratyahara","Niyama","Dharana"])),
+C("Patanjali's eight-limbed path from the Yoga Sutras.",recall("Name the eight limbs in order.","Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi."))
 ]},
 
 {id:"nadis",name:"Nadis",sk:"Nāḍī",
@@ -345,11 +347,11 @@ notes:[
 "<b>Pingala</b>: right side, sun, heating, energising.",
 "<b>Sushumna</b>: the central channel, running up the spine."],
 qs:[
-mc("Nadi means…",["Energy channel","Energy centre","Lock","Layer"]),
-match("Match each nadi to its description",[["Ida","Left, moon, cooling"],["Pingala","Right, sun, heating"],["Sushumna","Central, along the spine"]]),
-mc("Traditionally, how many nadis are there?",["72,000","7","108","3"]),
-mc("Which nadi runs up the centre of the spine?",["Sushumna","Ida","Pingala"]),
-recall("Name the three main nadis.","Ida (left, lunar), Pingala (right, solar), Sushumna (central).")
+C("Prana is said to travel around the subtle body through these.",mc("Nadi means…",["Energy channel","Energy centre","Lock","Layer"])),
+C("The three main nadis are linked to balancing the breath and energy.",match("Match each nadi to its description",[["Ida","Left, moon, cooling"],["Pingala","Right, sun, heating"],["Sushumna","Central, along the spine"]])),
+C("Hatha yoga texts describe a vast network of them.",mc("Traditionally, how many nadis are there?",["72,000","7","108","3"])),
+C("Kundalini energy is said to rise through this nadi.",mc("Which nadi runs up the centre of the spine?",["Sushumna","Ida","Pingala"])),
+C("Nadi shodhana, alternate nostril breathing, is designed to balance them.",recall("Name the three main nadis.","Ida (left, lunar), Pingala (right, solar), Sushumna (central)."))
 ]},
 
 {id:"chakras",name:"Chakras (7)",sk:"Cakra",
@@ -363,15 +365,15 @@ notes:[
 "<b>Ajna</b>: third eye, between the eyebrows. Intuition, insight.",
 "<b>Sahasrara</b>: crown, top of the head. The thousand-petal lotus. Connection to pure consciousness, spirituality."],
 qs:[
-order("Put the seven chakras in order from the base up.",["Muladhara","Svadhisthana","Manipura","Anahata","Vishuddha","Ajna","Sahasrara"]),
-match("Match each chakra to its location",[["Muladhara","Base of the spine"],["Svadhisthana","Lower belly"],["Manipura","Solar plexus / navel"],["Anahata","Heart"],["Vishuddha","Throat"],["Ajna","Between the eyebrows"],["Sahasrara","Crown of the head"]]),
-match("Match each chakra to its theme",[["Muladhara","Grounding, safety"],["Svadhisthana","Creativity, emotions"],["Manipura","Willpower, confidence"],["Anahata","Love, compassion"],["Vishuddha","Communication"],["Ajna","Intuition"],["Sahasrara","Spiritual connection"]]),
-mc("Chakra means…",["Wheel","Channel","Lock","Sheath"]),
-mc("Which chakra is at the heart?",["Anahata","Manipura","Vishuddha","Ajna"]),
-mc("Which chakra is the “third eye”?",["Ajna","Vishuddha","Anahata","Muladhara"]),
-mc("Which chakra is known as the thousand-petal lotus?",["Sahasrara (crown)","Ajna (third eye)","Anahata (heart)","Muladhara (root)"]),
-mc("Where is Sahasrara?",["Crown of the head","Between the eyebrows","Throat","Base of the spine"]),
-recall("What is the seventh chakra, where is it, and what is it known as?","Sahasrara, the crown chakra, at the top of the head. It is known as the thousand-petal lotus.")
+C("The chakras run up the spine from its base to the crown of the head.",order("Put the seven chakras in order from the base up.",["Muladhara","Svadhisthana","Manipura","Anahata","Vishuddha","Ajna","Sahasrara"])),
+C("Each chakra sits at a point along the spine or in the head.",match("Match each chakra to its location",[["Muladhara","Base of the spine"],["Svadhisthana","Lower belly"],["Manipura","Solar plexus / navel"],["Anahata","Heart"],["Vishuddha","Throat"],["Ajna","Between the eyebrows"],["Sahasrara","Crown of the head"]])),
+C("Each chakra is linked with a different area of life and feeling.",match("Match each chakra to its theme",[["Muladhara","Grounding, safety"],["Svadhisthana","Creativity, emotions"],["Manipura","Willpower, confidence"],["Anahata","Love, compassion"],["Vishuddha","Communication"],["Ajna","Intuition"],["Sahasrara","Spiritual connection"]])),
+C("Chakras are energy centres along the spine, often pictured as lotuses.",mc("Chakra means…",["Wheel","Channel","Lock","Sheath"])),
+C("Its name means “unstruck”, referring to a sound made without any striking.",mc("Which chakra is at the heart?",["Anahata","Manipura","Vishuddha","Ajna"])),
+C("Ida and pingala are said to meet at this chakra.",mc("Which chakra is the “third eye”?",["Ajna","Vishuddha","Anahata","Muladhara"])),
+C("The highest chakra, linked with pure consciousness.",mc("Which chakra is known as the thousand-petal lotus?",["Sahasrara (crown)","Ajna (third eye)","Anahata (heart)","Muladhara (root)"])),
+C("Its name means “thousand-petalled”; it is the highest of the seven.",mc("Where is Sahasrara?",["Crown of the head","Between the eyebrows","Throat","Base of the spine"])),
+C("It sits above the six main chakras.",recall("What is the seventh chakra, where is it, and what is it known as?","Sahasrara, the crown chakra, at the top of the head. It is known as the thousand-petal lotus."))
 ]},
 
 {id:"sutras",name:"Sutras 1.1, 1.2, 2.46",sk:"Yoga Sūtra",
@@ -380,15 +382,15 @@ notes:[
 "<b>1.2</b> <i>Yoga citta-vritti-nirodhah</i>: “Yoga is the stilling of the fluctuations of the mind.”",
 "<b>2.46</b> <i>Sthira sukham asanam</i>: “Posture should be steady and comfortable.”"],
 qs:[
-match("Match each sutra number to its Sanskrit",[["1.1","Atha yoga-anushasanam"],["1.2","Yoga citta-vritti-nirodhah"],["2.46","Sthira sukham asanam"]]),
-match("Match each sutra to its translation",[["1.1","Now begins the teaching of yoga"],["1.2","Yoga is the stilling of the fluctuations of the mind"],["2.46","Posture should be steady and comfortable"]]),
-mc("Which sutra says “Yoga is the stilling of the fluctuations of the mind”?",["1.2","1.1","2.46"]),
-mc("“Sthira sukham asanam” means…",["Posture should be steady and comfortable","Now begins the teaching of yoga","Yoga is stilling the mind","Practise every day"]),
-mc("In sutra 1.2, “citta-vritti” means…",["The fluctuations of the mind","The breath","The postures","The teacher"]),
-mc("In sutra 2.46, “sthira” and “sukha” mean…",["Steady and comfortable","Strong and fast","Still and silent","Hot and cold"]),
-recall("Say sutra 1.1 in Sanskrit and English.","Atha yoga-anushasanam. “Now begins the teaching of yoga.”"),
-recall("Say sutra 1.2 in Sanskrit and English.","Yoga citta-vritti-nirodhah. “Yoga is the stilling of the fluctuations of the mind.”"),
-recall("Say sutra 2.46 in Sanskrit and English.","Sthira sukham asanam. “Posture should be steady and comfortable.”")
+C("Two come from Book 1 (Samadhi Pada) and one from Book 2 (Sadhana Pada).",match("Match each sutra number to its Sanskrit",[["1.1","Atha yoga-anushasanam"],["1.2","Yoga citta-vritti-nirodhah"],["2.46","Sthira sukham asanam"]])),
+C("The Yoga Sutras were written by Patanjali around 2,000 years ago.",match("Match each sutra to its translation",[["1.1","Now begins the teaching of yoga"],["1.2","Yoga is the stilling of the fluctuations of the mind"],["2.46","Posture should be steady and comfortable"]])),
+C("This is the most famous definition of yoga.",mc("Which sutra says “Yoga is the stilling of the fluctuations of the mind”?",["1.2","1.1","2.46"])),
+C("The only instruction Patanjali gives about how to practise asana.",mc("“Sthira sukham asanam” means…",["Posture should be steady and comfortable","Now begins the teaching of yoga","Yoga is stilling the mind","Practise every day"])),
+C("Sutra 1.2 is Patanjali's definition of yoga.",mc("In sutra 1.2, “citta-vritti” means…",["The fluctuations of the mind","The breath","The postures","The teacher"])),
+C("From the sutra on asana: two qualities that balance each other.",mc("In sutra 2.46, “sthira” and “sukha” mean…",["Steady and comfortable","Strong and fast","Still and silent","Hot and cold"])),
+C("The opening line of the Yoga Sutras.",recall("Say sutra 1.1 in Sanskrit and English.","Atha yoga-anushasanam. “Now begins the teaching of yoga.”")),
+C("Patanjali's definition of yoga.",recall("Say sutra 1.2 in Sanskrit and English.","Yoga citta-vritti-nirodhah. “Yoga is the stilling of the fluctuations of the mind.”")),
+C("Patanjali's instruction on asana.",recall("Say sutra 2.46 in Sanskrit and English.","Sthira sukham asanam. “Posture should be steady and comfortable.”"))
 ]},
 
 {id:"sk-core",name:"Sanskrit: core words",sk:"Saṁskṛta",
@@ -427,50 +429,50 @@ notes:[
 "<b>Vira</b>: warrior",
 "<b>Vrksa</b>: tree"],
 qs:[
-mc("What does “Ardha” mean?",["half", "upward", "double", "quarter"]),
-mc("What does “Baddha” mean?",["bound", "lock", "released", "folded"]),
-mc("What does “Bandha” mean?",["lock", "bound", "seal / gesture", "breath retention"]),
-mc("What does “Dhanu” mean?",["bow", "staff", "arrow", "wheel"]),
-mc("What does “Eka” mean?",["one", "eight", "four", "half"]),
-mc("What does “Go” mean?",["cow", "bull", "eagle", "horse"]),
-mc("What does “Hasta” mean?",["hand", "wrist", "arm", "plough"]),
-mc("What does “Janu” mean?",["knee", "shin", "thigh", "ankle"]),
-mc("What does “Kona” mean?",["angle", "triangle", "curve", "circle"]),
-mc("What does “Mukha” mean?",["face", "seal / gesture", "chest", "shoulder"]),
-mc("What does “Nava” mean?",["boat", "bridge", "anchor", "oar"]),
-mc("What does “Pada” mean?",["foot", "big toe", "heel", "ankle"]),
-mc("What does “Padangustha” mean?",["big toe", "foot", "thumb", "arch of the foot"]),
-mc("What does “Parivrtta” mean?",["revolved", "side", "folded", "wide"]),
-mc("What does “Parsva” mean?",["side", "revolved", "spread", "corner"]),
-mc("What does “Paschima” mean?",["west / back body", "east / front body", "north / crown of the head", "south / lower body"]),
-mc("What does “Pida” mean?",["pressure", "foot", "release", "lightness"]),
-mc("What does “Prasarita” mean?",["spread", "side", "narrow", "gathered"]),
-mc("What does “Purva” mean?",["east / front body", "west / back body", "north / crown of the head", "inner / midline"]),
-mc("What does “Setu” mean?",["bridge", "head", "boat", "ladder"]),
-mc("What does “Sirsa” mean?",["head", "bridge", "neck", "shoulder"]),
-mc("What does “Supta” mean?",["reclined", "seated", "ease / comfort", "inverted"]),
-mc("What does “Surya” mean?",["sun", "moon", "star", "sky"]),
-mc("What does “Svan” mean?",["dog", "swan", "wolf", "cat"]),
-mc("What does “Ubhaya” mean?",["both", "upward", "one", "alternate"]),
-mc("What does “Upavishta” mean?",["seated", "reclined", "standing", "kneeling"]),
-mc("What does “Ut” mean?",["intense", "gentle", "outward", "steady"]),
-mc("What does “Utkata” mean?",["fierce", "extended", "intense stretch", "steady"]),
-mc("What does “Utthita” mean?",["extended", "fierce", "intense stretch", "bound"]),
-mc("What does “Urdhva” mean?",["upward", "down / downward", "half", "forward"]),
-mc("What does “Vira” mean?",["warrior", "victory", "sage", "king"]),
-mc("What does “Vrksa” mean?",["tree", "mountain", "branch", "root"]),
-mc("Which word means “head”?",["Sirsa", "Bandha", "Utkata", "Prasarita"]),
-mc("Which word means “warrior”?",["Vira", "Dhanu", "Pada", "Purva"]),
-mc("Which word means “one”?",["Eka", "Baddha", "Vira", "Prasarita"]),
-mc("Which word means “big toe”?",["Padangustha", "Hasta", "Baddha", "Bandha"]),
-mc("Which word means “tree”?",["Vrksa", "Parivrtta", "Bandha", "Janu"]),
-mc("Which word means “bound”?",["Baddha", "Dhanu", "Purva", "Parsva"]),
-match("Match each Sanskrit word to its meaning",[["Supta", "reclined"], ["Parsva", "side"], ["Utthita", "extended"], ["Pada", "foot"], ["Go", "cow"]]),
-match("Match each Sanskrit word to its meaning",[["Nava", "boat"], ["Ardha", "half"], ["Parivrtta", "revolved"], ["Upavishta", "seated"], ["Pida", "pressure"]]),
-match("Match each Sanskrit word to its meaning",[["Paschima", "west / back body"], ["Prasarita", "spread"], ["Kona", "angle"], ["Bandha", "lock"], ["Hasta", "hand"]]),
-match("Match each Sanskrit word to its meaning",[["Mukha", "face"], ["Eka", "one"], ["Setu", "bridge"], ["Utkata", "fierce"], ["Svan", "dog"]]),
-match("Match each Sanskrit word to its meaning",[["Padangustha", "big toe"], ["Surya", "sun"], ["Ubhaya", "both"], ["Baddha", "bound"], ["Urdhva", "upward"]]),
-match("Match each Sanskrit word to its meaning",[["Vira", "warrior"], ["Sirsa", "head"], ["Janu", "knee"], ["Vrksa", "tree"], ["Purva", "east / front body"]])
+C("As in Ardha Navasana and Ardha Padmasana.",mc("What does “Ardha” mean?",["half", "upward", "double", "quarter"])),
+C("As in Baddha Konasana and Baddha Virabhadrasana.",mc("What does “Baddha” mean?",["bound", "lock", "released", "folded"])),
+C("Used in asana and pranayama to work with prana.",mc("What does “Bandha” mean?",["lock", "bound", "seal / gesture", "breath retention"])),
+C("As in Dhanurasana and Urdhva Dhanurasana.",mc("What does “Dhanu” mean?",["bow", "staff", "arrow", "wheel"])),
+C("As in Eka Pada Bakasana and Eka Pada Galavasana.",mc("What does “Eka” mean?",["one", "eight", "four", "half"])),
+C("As in Gomukhasana.",mc("What does “Go” mean?",["cow", "bull", "eagle", "horse"])),
+C("As in Urdhva Hastasana and Mukta Hasta Sirsasana.",mc("What does “Hasta” mean?",["hand", "wrist", "arm", "plough"])),
+C("As in Janu Sirsasana and Parivrtta Janu Sirsasana.",mc("What does “Janu” mean?",["knee", "shin", "thigh", "ankle"])),
+C("As in Baddha Konasana.",mc("What does “Kona” mean?",["angle", "triangle", "curve", "circle"])),
+C("As in Adho Mukha Svanasana and Adho Mukha Vrksasana.",mc("What does “Mukha” mean?",["face", "seal / gesture", "chest", "shoulder"])),
+C("As in Navasana.",mc("What does “Nava” mean?",["boat", "bridge", "anchor", "oar"])),
+C("As in Eka Pada Bakasana and Eka Pada Galavasana.",mc("What does “Pada” mean?",["foot", "big toe", "heel", "ankle"])),
+C("As in Padangusthasana and Supta Padangusthasana.",mc("What does “Padangustha” mean?",["big toe", "foot", "thumb", "arch of the foot"])),
+C("As in Parivrtta Utkatasana and Parivrtta Trikonasana.",mc("What does “Parivrtta” mean?",["revolved", "side", "folded", "wide"])),
+C("As in Parsva Bakasana and Parsva Balasana.",mc("What does “Parsva” mean?",["side", "revolved", "spread", "corner"])),
+C("As in Paschimottanasana.",mc("What does “Paschima” mean?",["west / back body", "east / front body", "north / crown of the head", "south / lower body"])),
+C("As in Karnapidasana.",mc("What does “Pida” mean?",["pressure", "foot", "release", "lightness"])),
+C("As in Prasarita Padottanasana A and Prasarita Padottanasana B.",mc("What does “Prasarita” mean?",["spread", "side", "narrow", "gathered"])),
+C("As in Purvottanasana.",mc("What does “Purva” mean?",["east / front body", "west / back body", "north / crown of the head", "inner / midline"])),
+C("As in Setu Bandha Sarvangasana.",mc("What does “Setu” mean?",["bridge", "head", "boat", "ladder"])),
+C("As in Sirsasana and Janu Sirsasana.",mc("What does “Sirsa” mean?",["head", "bridge", "neck", "shoulder"])),
+C("As in Supta Kapotasana and Supta Matsyendrasana.",mc("What does “Supta” mean?",["reclined", "seated", "ease / comfort", "inverted"])),
+C("As in Surya Namaskar.",mc("What does “Surya” mean?",["sun", "moon", "star", "sky"])),
+C("As in Adho Mukha Svanasana and Urdhva Mukha Svanasana.",mc("What does “Svan” mean?",["dog", "swan", "wolf", "cat"])),
+C("As in Ubhaya Padangusthasana.",mc("What does “Ubhaya” mean?",["both", "upward", "one", "alternate"])),
+C("As in Upavishta Konasana.",mc("What does “Upavishta” mean?",["seated", "reclined", "standing", "kneeling"])),
+C("As in Uttanasana.",mc("What does “Ut” mean?",["intense", "gentle", "outward", "steady"])),
+C("As in Utkatasana and Utkata Konasana.",mc("What does “Utkata” mean?",["fierce", "extended", "intense stretch", "steady"])),
+C("As in Utthita Trikonasana and Utthita Parsvakonasana.",mc("What does “Utthita” mean?",["extended", "fierce", "intense stretch", "bound"])),
+C("As in Urdhva Hastasana and Urdhva Dhanurasana.",mc("What does “Urdhva” mean?",["upward", "down / downward", "half", "forward"])),
+C("As in Virabhadrasana.",mc("What does “Vira” mean?",["warrior", "victory", "sage", "king"])),
+C("As in Vrksasana and Adho Mukha Vrksasana.",mc("What does “Vrksa” mean?",["tree", "mountain", "branch", "root"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “head”?",["Sirsa", "Bandha", "Utkata", "Prasarita"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “warrior”?",["Vira", "Dhanu", "Pada", "Purva"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “one”?",["Eka", "Baddha", "Vira", "Prasarita"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “big toe”?",["Padangustha", "Hasta", "Baddha", "Bandha"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “tree”?",["Vrksa", "Parivrtta", "Bandha", "Janu"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “bound”?",["Baddha", "Dhanu", "Purva", "Parsva"])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Supta", "reclined"], ["Parsva", "side"], ["Utthita", "extended"], ["Pada", "foot"], ["Go", "cow"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Nava", "boat"], ["Ardha", "half"], ["Parivrtta", "revolved"], ["Upavishta", "seated"], ["Pida", "pressure"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Paschima", "west / back body"], ["Prasarita", "spread"], ["Kona", "angle"], ["Bandha", "lock"], ["Hasta", "hand"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Mukha", "face"], ["Eka", "one"], ["Setu", "bridge"], ["Utkata", "fierce"], ["Svan", "dog"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Padangustha", "big toe"], ["Surya", "sun"], ["Ubhaya", "both"], ["Baddha", "bound"], ["Urdhva", "upward"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Vira", "warrior"], ["Sirsa", "head"], ["Janu", "knee"], ["Vrksa", "tree"], ["Purva", "east / front body"]]))
 ]},
 
 {id:"sk-extra",name:"Sanskrit: practice terms",sk:"Saṁskṛta",
@@ -507,48 +509,48 @@ notes:[
 "<b>Uttana</b>: intense stretch",
 "<b>Vinyasa</b>: placement / linked breath-movement"],
 qs:[
-mc("What does “Adho” mean?",["down / downward", "upward", "forward / to the front", "backward"]),
-mc("What does “Asana” mean?",["seat / posture", "breath control", "practice / repeated effort", "withdrawal of the senses"]),
-mc("What does “Bala” mean?",["child", "cradle", "elder", "student"]),
-mc("What does “Bhujanga” mean?",["serpent / cobra", "eagle", "scorpion", "lizard"]),
-mc("What does “Chandra” mean?",["moon", "sun", "four", "star"]),
-mc("What does “Chatur” mean?",["four", "three", "moon", "eight"]),
-mc("What does “Danda” mean?",["staff", "bow", "pillar", "rope"]),
-mc("What does “Drishti” mean?",["focused gaze", "withdrawal of the senses", "single-pointed concentration", "sacred sound or phrase"]),
-mc("What does “Garuda” mean?",["eagle", "serpent / cobra", "peacock", "hawk"]),
-mc("What does “Guru” mean?",["teacher / spiritual preceptor (lit. “heavy, weighty”)", "student / disciple (lit. “one who is led”)", "community / spiritual fellowship", "the lineage a teaching is passed down through"]),
-mc("What does “Hala” mean?",["plough", "hand", "sickle", "wheel"]),
-mc("What does “Mantra” mean?",["sacred sound or phrase", "intention / resolve", "seal / gesture", "a teacher’s spoken instruction"]),
-mc("What does “Matsya” mean?",["fish", "crocodile", "turtle", "serpent / cobra"]),
-mc("What does “Mudra” mean?",["seal / gesture", "lock", "face", "sacred sound or phrase"]),
-mc("What does “Namaste” mean?",["“I bow to you”", "“peace be with you”", "“I honour my teacher”", "“thank you”"]),
-mc("What does “OM (Aum)” mean?",["primordial sound", "a greeting of respect", "peace", "the seat of the soul"]),
-mc("What does “Prana” mean?",["life-force / vital energy", "intention / resolve", "the channels energy travels along", "the physical body and its tissues"]),
-mc("What does “Salamba” mean?",["supported", "unsupported", "bound", "balanced"]),
-mc("What does “Sangha” mean?",["community / spiritual fellowship", "teacher / spiritual preceptor", "the room or space practice happens in", "a vow taken at the start of practice"]),
-mc("What does “Sankalpa” mean?",["intention / resolve", "sacred sound or phrase", "surrender / letting go", "a closing prayer of thanks"]),
-mc("What does “Shanti” mean?",["peace", "ease / comfort", "silence", "surrender"]),
-mc("What does “Shava” mean?",["corpse", "deep sleep", "stillness", "ashes"]),
-mc("What does “Sthira” mean?",["steady", "ease / comfort", "slow", "silent"]),
-mc("What does “Sukha” mean?",["ease / comfort", "steady", "reclined", "sweetness"]),
-mc("What does “Tada” mean?",["mountain", "tree", "three", "stone"]),
-mc("What does “Tri” mean?",["three", "triangle", "four", "mountain"]),
-mc("What does “Trikona” mean?",["triangle", "three", "angle", "square"]),
-mc("What does “Ushtra” mean?",["camel", "ox", "horse", "elephant"]),
-mc("What does “Uttana” mean?",["intense stretch", "fierce", "steady", "upright"]),
-mc("What does “Vinyasa” mean?",["placement / linked breath-movement", "a fast-paced style of class", "the sequence of the sun salutations", "steady effort repeated over time"]),
-mc("Which word means “supported”?",["Salamba", "Danda", "OM (Aum)", "Sthira"]),
-mc("Which word means “steady”?",["Sthira", "Salamba", "Mudra", "Tri"]),
-mc("Which word means “child”?",["Bala", "Mantra", "OM (Aum)", "Sankalpa"]),
-mc("Which word means “community / spiritual fellowship”?",["Sangha", "Namaste", "Mantra", "Guru"]),
-mc("Which word means “seat / posture”?",["Asana", "Garuda", "Trikona", "Danda"]),
-mc("Which word means “intention / resolve”?",["Sankalpa", "Sukha", "Tri", "Drishti"]),
-match("Match each Sanskrit word to its meaning",[["Shava", "corpse"], ["Garuda", "eagle"], ["Chandra", "moon"], ["Uttana", "intense stretch"], ["Tada", "mountain"]]),
-match("Match each Sanskrit word to its meaning",[["Mantra", "sacred sound or phrase"], ["Sthira", "steady"], ["Salamba", "supported"], ["Asana", "seat / posture"], ["Adho", "down / downward"]]),
-match("Match each Sanskrit word to its meaning",[["Danda", "staff"], ["Drishti", "focused gaze"], ["Shanti", "peace"], ["Tri", "three"], ["Matsya", "fish"]]),
-match("Match each Sanskrit word to its meaning",[["Chatur", "four"], ["Mudra", "seal / gesture"], ["Trikona", "triangle"], ["Bhujanga", "serpent / cobra"], ["Vinyasa", "placement / linked breath-movement"]]),
-match("Match each Sanskrit word to its meaning",[["Sankalpa", "intention / resolve"], ["Ushtra", "camel"], ["Namaste", "“I bow to you”"], ["Sukha", "ease / comfort"], ["Hala", "plough"]]),
-match("Match each Sanskrit word to its meaning",[["OM (Aum)", "primordial sound"], ["Prana", "life-force / vital energy"], ["Guru", "teacher / spiritual preceptor (lit. “heavy, weighty”)"], ["Sangha", "community / spiritual fellowship"], ["Bala", "child"]])
+C("As in Adho Mukha Svanasana and Adho Mukha Vrksasana.",mc("What does “Adho” mean?",["down / downward", "upward", "forward / to the front", "backward"])),
+C("One of Patanjali's eight limbs, and the ending of nearly every pose name.",mc("What does “Asana” mean?",["seat / posture", "breath control", "practice / repeated effort", "withdrawal of the senses"])),
+C("As in Balasana.",mc("What does “Bala” mean?",["child", "cradle", "elder", "student"])),
+C("As in Bhujangasana and Salamba Bhujangasana.",mc("What does “Bhujanga” mean?",["serpent / cobra", "eagle", "scorpion", "lizard"])),
+C("As in Ardha Chandrasana and Ashta Chandrasana.",mc("What does “Chandra” mean?",["moon", "sun", "four", "star"])),
+C("As in Chaturanga Dandasana.",mc("What does “Chatur” mean?",["four", "three", "moon", "eight"])),
+C("As in Dandasana and Chaturanga Dandasana.",mc("What does “Danda” mean?",["staff", "bow", "pillar", "rope"])),
+C("Every pose card in the Yogaposa library lists one.",mc("What does “Drishti” mean?",["focused gaze", "withdrawal of the senses", "single-pointed concentration", "sacred sound or phrase"])),
+C("As in Garudasana.",mc("What does “Garuda” mean?",["eagle", "serpent / cobra", "peacock", "hawk"])),
+C("A traditional role in how yoga has been passed down.",mc("What does “Guru” mean?",["teacher / spiritual preceptor (lit. “heavy, weighty”)", "student / disciple (lit. “one who is led”)", "community / spiritual fellowship", "the lineage a teaching is passed down through"])),
+C("As in Halasana.",mc("What does “Hala” mean?",["plough", "hand", "sickle", "wheel"])),
+C("Often repeated or chanted in meditation.",mc("What does “Mantra” mean?",["sacred sound or phrase", "intention / resolve", "seal / gesture", "a teacher’s spoken instruction"])),
+C("As in Matsyasana.",mc("What does “Matsya” mean?",["fish", "crocodile", "turtle", "serpent / cobra"])),
+C("Often made with the hands in meditation or pranayama.",mc("What does “Mudra” mean?",["seal / gesture", "lock", "face", "sacred sound or phrase"])),
+C("Often said at the end of a yoga class.",mc("What does “Namaste” mean?",["“I bow to you”", "“peace be with you”", "“I honour my teacher”", "“thank you”"])),
+C("Often chanted at the start or end of class.",mc("What does “OM (Aum)” mean?",["primordial sound", "a greeting of respect", "peace", "the seat of the soul"])),
+C("Pranayama works with this.",mc("What does “Prana” mean?",["life-force / vital energy", "intention / resolve", "the channels energy travels along", "the physical body and its tissues"])),
+C("As in Salamba Bhujangasana and Salamba Sarvangasana.",mc("What does “Salamba” mean?",["supported", "unsupported", "bound", "balanced"])),
+C("A word used in yoga and Buddhism alike.",mc("What does “Sangha” mean?",["community / spiritual fellowship", "teacher / spiritual preceptor", "the room or space practice happens in", "a vow taken at the start of practice"])),
+C("Often set at the start of a class or in yoga nidra.",mc("What does “Sankalpa” mean?",["intention / resolve", "sacred sound or phrase", "surrender / letting go", "a closing prayer of thanks"])),
+C("Often chanted three times at the end of a mantra.",mc("What does “Shanti” mean?",["peace", "ease / comfort", "silence", "surrender"])),
+C("As in Savasana.",mc("What does “Shava” mean?",["corpse", "deep sleep", "stillness", "ashes"])),
+C("Appears in sutra 2.46.",mc("What does “Sthira” mean?",["steady", "ease / comfort", "slow", "silent"])),
+C("Appears in sutra 2.46.",mc("What does “Sukha” mean?",["ease / comfort", "steady", "reclined", "sweetness"])),
+C("As in Tadasana.",mc("What does “Tada” mean?",["mountain", "tree", "three", "stone"])),
+C("As in Trikonasana.",mc("What does “Tri” mean?",["three", "triangle", "four", "mountain"])),
+C("As in Utthita Trikonasana and Parivrtta Trikonasana.",mc("What does “Trikona” mean?",["triangle", "three", "angle", "square"])),
+C("As in Ustrasana.",mc("What does “Ushtra” mean?",["camel", "ox", "horse", "elephant"])),
+C("As in Uttanasana and Ardha Uttanasana.",mc("What does “Uttana” mean?",["intense stretch", "fierce", "steady", "upright"])),
+C("Also the name of a style of yoga.",mc("What does “Vinyasa” mean?",["placement / linked breath-movement", "a fast-paced style of class", "the sequence of the sun salutations", "steady effort repeated over time"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “supported”?",["Salamba", "Danda", "OM (Aum)", "Sthira"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “steady”?",["Sthira", "Salamba", "Mudra", "Tri"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “child”?",["Bala", "Mantra", "OM (Aum)", "Sankalpa"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “community / spiritual fellowship”?",["Sangha", "Namaste", "Mantra", "Guru"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “seat / posture”?",["Asana", "Garuda", "Trikona", "Danda"])),
+C("From the Sanskrit glossary in the Yogaposa app.",mc("Which word means “intention / resolve”?",["Sankalpa", "Sukha", "Tri", "Drishti"])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Shava", "corpse"], ["Garuda", "eagle"], ["Chandra", "moon"], ["Uttana", "intense stretch"], ["Tada", "mountain"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Mantra", "sacred sound or phrase"], ["Sthira", "steady"], ["Salamba", "supported"], ["Asana", "seat / posture"], ["Adho", "down / downward"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Danda", "staff"], ["Drishti", "focused gaze"], ["Shanti", "peace"], ["Tri", "three"], ["Matsya", "fish"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Chatur", "four"], ["Mudra", "seal / gesture"], ["Trikona", "triangle"], ["Bhujanga", "serpent / cobra"], ["Vinyasa", "placement / linked breath-movement"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["Sankalpa", "intention / resolve"], ["Ushtra", "camel"], ["Namaste", "“I bow to you”"], ["Sukha", "ease / comfort"], ["Hala", "plough"]])),
+C("From the Sanskrit glossary in the Yogaposa app.",match("Match each Sanskrit word to its meaning",[["OM (Aum)", "primordial sound"], ["Prana", "life-force / vital energy"], ["Guru", "teacher / spiritual preceptor (lit. “heavy, weighty”)"], ["Sangha", "community / spiritual fellowship"], ["Bala", "child"]]))
 ]}
 ];
 
@@ -626,6 +628,7 @@ function render(){
     <div class="card">
       <div class="qmeta"><span>Question ${S.i+1} of ${n} · ${typeLabel[q.t]}</span><span>${esc(t.name)} · Score ${S.score}</span></div>
       <div class="q">${esc(q.q)}</div>
+      ${q.c?`<div class="ctx">${esc(q.c)}</div>`:""}
       <div id="body"></div>
       <div id="fb"></div>
     </div>
