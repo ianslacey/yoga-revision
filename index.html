@@ -93,6 +93,9 @@ select{font:inherit;width:100%;min-width:0;min-height:44px;padding:8px;border-ra
 .seqitem{display:flex;gap:10px;align-items:center}
 .seqitem em{font-style:normal;font-variant-numeric:tabular-nums;color:var(--muted);width:1.5em}
 .pool{display:flex;flex-wrap:wrap;gap:8px}
+.pk.on{background:var(--soft);border-color:var(--accent);color:var(--ink);font-weight:600}
+.pk.missedpk{border:2px dashed var(--good)}
+.pk[disabled]{cursor:default}
 .reveal{border-left:3px solid var(--gold);padding:10px 14px;background:var(--gold-soft);border-radius:0 10px 10px 0}
 .big{font-family:var(--display);font-size:3rem;font-weight:700;line-height:1}
 .missed{display:flex;flex-direction:column;gap:10px}
@@ -112,6 +115,7 @@ const mc=(q,o,x)=>({t:"mc",q,o,x});
 const match=(q,p,x)=>({t:"match",q,p,x});
 const order=(q,o,x)=>({t:"order",q,o,x});
 const recall=(q,a,x)=>({t:"recall",q,a,x});
+const pick=(q,r,w,x)=>({t:"pick",q,r,w,x});
 
 const C=(c,q)=>(q.c=c,q);
 const TOPICS=[
@@ -124,7 +128,7 @@ notes:[
 "<b>Udana</b>: throat. Upward. Speech, expression.",
 "<b>Vyana</b>: the whole body. Outward. Circulation."],
 qs:[
-C("Prana, the life force, is said to move through the body as five “winds”, each with its own direction and job.",recall("Name the five types of prana (vayus).","Prana, Apana, Samana, Udana, Vyana.")),
+C("Prana, the life force, is said to move through the body as five “winds”, each with its own direction and job.",pick("Select the five vayus.",["Prana", "Apana", "Samana", "Udana", "Vyana"],["Pingala", "Tapas", "Mudra"])),
 C("Each vayu is centred in a different region of the body.",match("Match each vayu to its area of the body",[["Prana","Chest and head"],["Apana","Pelvis"],["Samana","Navel"],["Udana","Throat"],["Vyana","Whole body"]])),
 C("The vayus are the five movements of prana, each flowing in its own direction.",mc("Which vayu moves downward and governs elimination?",["Apana","Prana","Udana","Vyana"])),
 C("Each vayu has a job; this one turns what we take in into nourishment.",mc("Which vayu governs digestion?",["Samana","Apana","Udana","Vyana"])),
@@ -142,7 +146,7 @@ qs:[
 C("A quality that yoga philosophy says is the cure for ignorance (avidya).",mc("Viveka means…",["Discernment","Practice","Non-violence","Contentment"])),
 C("Viveka is the mind's ability to judge clearly and cut through confusion.",mc("Viveka is the ability to tell apart…",["The real from the unreal","Inhale from exhale","Left from right","Sattva from rajas"])),
 C("Samkhya-yoga describes reality as two principles, and says suffering comes from confusing them.",mc("In yoga philosophy, viveka is seeing the difference between…",["Purusha (the Self) and Prakriti (nature)","Ida and Pingala","Yama and Niyama","The koshas"])),
-C("A key quality in yoga philosophy, said to be the cure for ignorance (avidya).",recall("In one sentence, what is viveka?","Discernment: the ability to tell the real, lasting Self from what is changing and temporary."))
+C("A key quality in yoga philosophy, said to be the cure for ignorance (avidya).",mc("Which best describes viveka?",["Telling the lasting Self apart from what changes", "Steady practice over a long time", "Contentment with what you already have", "Withdrawing the senses from the world"]))
 ]},
 
 {id:"abhyasa",name:"Abhyasa",sk:"Abhyāsa",
@@ -154,7 +158,7 @@ qs:[
 C("One of the two methods Patanjali gives for stilling the fluctuations of the mind.",mc("Abhyasa means…",["Practice","Discernment","Purity","Breath control"])),
 C("Patanjali names two methods that work together to still the mind, often compared to the two wings of a bird.",mc("Abhyasa is traditionally paired with…",["Vairagya (non-attachment)","Viveka (discernment)","Tapas (discipline)","Pranayama (breathwork)"])),
 C("Patanjali says practice needs three conditions to take root.",mc("Practice becomes firmly established when it is done…",["For a long time, without breaks, with dedication","Only when you feel like it","Fast and hard for a short time","Only with a teacher present"])),
-C("One of a pair of methods for stilling the mind, like the two wings of a bird.",recall("What does abhyasa mean, and what is it paired with?","Abhyasa is practice (steady, consistent effort). It is paired with vairagya, non-attachment."))
+C("One of a pair of methods for stilling the mind, like the two wings of a bird.",mc("Abhyasa means… and is paired with…",["Practice; vairagya (non-attachment)", "Non-attachment; viveka (discernment)", "Discipline; santosha (contentment)", "Practice; pranayama (breath control)"]))
 ]},
 
 {id:"samskara",name:"Samskara",sk:"Saṁskāra",
@@ -166,7 +170,7 @@ qs:[
 C("The word comes from “sam” (together) and “kara” (action or making).",mc("A samskara is…",["An impression left in the mind by actions and experiences","A type of breathing","An energy centre","A yoga posture"])),
 C("Samskaras build up in the mind over a lifetime of experience.",mc("Repeating the same samskara over and over creates…",["Habits and patterns","Prana","Chakras","Bandhas"])),
 C("Samskaras can be helpful or unhelpful, and they are not fixed.",mc("How does yoga practice work with samskaras?",["It helps form new, positive impressions","It deletes them instantly","It has nothing to do with them","It makes them stronger"])),
-C("A key idea in yoga psychology, from “sam” (together) and “kara” (making).",recall("Explain samskara in your own words.","An impression or imprint left in the mind by what we do and experience. Repeated, they form habits and patterns that shape how we act."))
+C("A key idea in yoga psychology, from “sam” (together) and “kara” (making).",mc("Which is the best example of a samskara at work?",["Reaching for your phone whenever you feel bored, without thinking", "Holding a pose for five breaths", "Reading a yoga text for the first time", "Breathing through the left nostril"]))
 ]},
 
 {id:"dukkha",name:"Dukkha",sk:"Duḥkha",
@@ -179,7 +183,7 @@ qs:[
 C("A key word in both the Yoga Sutras and Buddhism; the Buddha's first noble truth is about it.",mc("Dukkha means…",["Suffering / dissatisfaction","Happiness","Breath","Practice"])),
 C("Dukkha has a partner word that describes the opposite state.",mc("The opposite of dukkha is…",["Sukha","Sattva","Samskara","Satya"])),
 C("The word is built from “du” (bad) and “kha” (space or hole).",mc("The traditional image behind “dukkha” is…",["A badly fitting wheel","A closed door","A storm","A broken pot"])),
-C("A key word in the Yoga Sutras and Buddhism, often met when asking why we practise.",recall("What is dukkha, and what is its opposite?","Dukkha is suffering or dissatisfaction. Its opposite is sukha, ease or happiness."))
+C("A key word in the Yoga Sutras and Buddhism, often met when asking why we practise.",mc("Dukkha and its opposite are…",["Suffering, and sukha (ease)", "Ease, and sukha (suffering)", "Suffering, and sattva (balance)", "Pain, and samskara (impression)"]))
 ]},
 
 {id:"samyama",name:"Samyama",sk:"Saṁyama",
@@ -189,7 +193,7 @@ notes:[
 qs:[
 C("Samyama means “holding together”, and is taught in the third book of the Yoga Sutras.",mc("Samyama is the combination of…",["Dharana, dhyana and samadhi","Yama, niyama and asana","Asana, pranayama and pratyahara","Ida, pingala and sushumna"])),
 C("The last three limbs are practised together, each deepening the one before.",order("Put the three parts of samyama in order.",["Dharana (concentration)","Dhyana (meditation)","Samadhi (absorption)"])),
-C("Taught in Book 3 of the Yoga Sutras; the name means “holding together”.",recall("What is samyama?","Practising dharana (concentration), dhyana (meditation) and samadhi (absorption) together on one object."))
+C("Taught in Book 3 of the Yoga Sutras; the name means “holding together”.",mc("Samyama happens when…",["Concentration, meditation and absorption are held on one object", "All eight limbs are practised in one session", "The three bandhas are held together", "Ida and pingala are in balance"]))
 ]},
 
 {id:"gunas",name:"Gunas",sk:"Guṇa",
@@ -200,7 +204,7 @@ notes:[
 "<b>Tamas</b>: inertia, heaviness, dullness; also rest and stability.",
 "Yoga aims to increase sattva."],
 qs:[
-C("In yoga and Ayurveda, everything in nature is a mix of three qualities.",recall("Name the three gunas.","Sattva, Rajas, Tamas.")),
+C("In yoga and Ayurveda, everything in nature is a mix of three qualities.",pick("Select the three gunas.",["Sattva", "Rajas", "Tamas"],["Satya", "Santosha", "Samskara"])),
 C("Each guna is a different quality, seen in food, moods and even times of day.",match("Match each guna to its quality",[["Sattva","Balance, clarity"],["Rajas","Activity, restlessness"],["Tamas","Inertia, heaviness"]])),
 C("Each guna shows up in how the mind feels from moment to moment.",mc("Feeling restless and unable to sit still is mostly…",["Rajas","Sattva","Tamas"])),
 C("Our mood shifts between the three gunas through the day.",mc("Feeling sluggish, heavy and unmotivated is mostly…",["Tamas","Sattva","Rajas"])),
@@ -219,7 +223,7 @@ C("Used in asana and pranayama, and described in the Hatha Yoga Pradipika.",mc("
 C("Each bandha engages a different part of the body.",match("Match each bandha to where it is",[["Mula bandha","Pelvic floor"],["Uddiyana bandha","Abdomen"],["Jalandhara bandha","Throat"]])),
 C("The three main bandhas can be held one at a time or all at once.",mc("All three bandhas held together are called…",["Maha bandha","Mula bandha","Samyama","Pranayama"])),
 C("“Jala” means net; this bandha is often used during breath retention.",mc("Jalandhara bandha involves…",["Drawing the chin towards the chest","Lifting the pelvic floor","Drawing the belly in and up","Pressing the hands into the floor"])),
-C("Bandhas are used to hold and direct prana, especially in pranayama.",recall("Name the three main bandhas.","Mula bandha (root lock), Uddiyana bandha (abdominal lock), Jalandhara bandha (throat lock)."))
+C("Bandhas are used to hold and direct prana, especially in pranayama.",pick("Select the three main bandhas.",["Mula bandha", "Uddiyana bandha", "Jalandhara bandha"],["Anahata bandha", "Kapala bandha", "Nadi bandha"]))
 ]},
 
 {id:"upanishads",name:"Upanishads",sk:"Upaniṣad",
@@ -233,7 +237,7 @@ qs:[
 C("The name describes how these teachings were originally received.",mc("“Upanishad” means…",["Sitting down near (a teacher)","Eight limbs","Song of God","Lock"])),
 C("They are among the oldest spiritual texts of India, around 2,500 years old or more.",mc("The Upanishads are the final part of…",["The Vedas","The Yoga Sutras","The Bhagavad Gita","The Hatha Yoga Pradipika"])),
 C("They explore the nature of the self and of the universe.",mc("The main teaching of the Upanishads is that…",["Atman (the Self) is one with Brahman (ultimate reality)","The body must be strong","Asana is the goal of yoga","The gunas are bad"])),
-C("Ancient texts from India, studied for thousands of years, and the source of the koshas.",recall("What are the Upanishads?","Ancient philosophical texts, the final part of the Vedas (Vedanta). Their main teaching is that the Self (Atman) is one with ultimate reality (Brahman)."))
+C("Ancient texts from India, studied for thousands of years, and the source of the koshas.",mc("Which statement about the Upanishads is true?",["They are the final part of the Vedas and teach that Atman is Brahman", "They were written by Patanjali and set out the eight limbs", "They are a hatha yoga manual describing the bandhas", "They are a modern commentary on the Bhagavad Gita"]))
 ]},
 
 {id:"koshas",name:"Koshas",sk:"Kośa",
@@ -261,7 +265,7 @@ notes:[
 "<b>Dvesha</b>: aversion to pain.",
 "<b>Abhinivesha</b>: fear of death, clinging to life."],
 qs:[
-C("Patanjali lists five of these in Book 2 of the Yoga Sutras.",recall("Name the five kleshas.","Avidya, Asmita, Raga, Dvesha, Abhinivesha.")),
+C("Patanjali lists five of these in Book 2 of the Yoga Sutras.",pick("Select the five kleshas.",["Avidya", "Asmita", "Raga", "Dvesha", "Abhinivesha"],["Ahimsa", "Santosha", "Viveka"])),
 C("Each klesha is a different way the mind causes us suffering.",match("Match each klesha to its meaning",[["Avidya","Ignorance"],["Asmita","Ego"],["Raga","Attachment"],["Dvesha","Aversion"],["Abhinivesha","Fear of death"]])),
 C("Patanjali lists five of them, and much of yoga practice aims to weaken them.",mc("Kleshas are…",["Causes of suffering","Energy channels","Types of breath","Ethical rules"])),
 C("Patanjali says one klesha is the field in which all the others grow.",mc("Which klesha is the root of all the others?",["Avidya","Raga","Dvesha","Asmita"])),
@@ -277,7 +281,7 @@ qs:[
 C("In Samkhya philosophy, one of the two basic principles that make up reality.",mc("Purusha is…",["Pure consciousness, the true Self","Matter and nature","The physical body","A type of breath"])),
 C("Purusha is one half of the Samkhya pair, alongside Prakriti.",mc("Purusha is often called…",["The seer / witness","The seen","The doer","The breath"])),
 C("Purusha is contrasted with Prakriti, the world of nature and matter.",mc("Which statement about Purusha is true?",["It never changes","It is made of the gunas","It is the same as the mind","It is the physical body"])),
-C("One of the two principles of Samkhya philosophy, the partner of Prakriti.",recall("What is Purusha?","Pure consciousness: the unchanging true Self that witnesses everything."))
+C("One of the two principles of Samkhya philosophy, the partner of Prakriti.",mc("Which describes Purusha?",["Unchanging pure consciousness, the witness", "The changing world of nature and matter", "The breath moving through the body", "The quality of balance and clarity"]))
 ]},
 
 {id:"prakriti",name:"Prakriti",sk:"Prakṛti",
@@ -291,7 +295,7 @@ C("In Samkhya philosophy, one of the two basic principles that make up reality, 
 C("Everything in nature, including body and mind, shares the same basic ingredients.",mc("Prakriti is made up of…",["The three gunas","The five koshas","The eight limbs","The five kleshas"])),
 C("In Samkhya, everything that changes belongs to one side of the pair.",mc("Does the mind belong to Purusha or Prakriti?",["Prakriti","Purusha"])),
 C("Samkhya sorts everything into one of these two categories.",match("Purusha or Prakriti?",[["The body","Prakriti"],["The witness","Purusha"],["Thoughts","Prakriti"],["Pure awareness","Purusha"]])),
-C("The two principles of Samkhya philosophy, which underpins the Yoga Sutras.",recall("What is the difference between Purusha and Prakriti?","Purusha is pure, unchanging consciousness (the seer). Prakriti is nature and matter, everything that changes, including body and mind (the seen)."))
+C("The two principles of Samkhya philosophy, which underpins the Yoga Sutras.",mc("Which pair is correct?",["Purusha: the seer, unchanging. Prakriti: the seen, changing", "Purusha: the seen, changing. Prakriti: the seer, unchanging", "Both are made of the three gunas", "Both are forms of prana"]))
 ]},
 
 {id:"yamas",name:"Yamas",sk:"Yama",
@@ -303,7 +307,7 @@ notes:[
 "<b>Brahmacharya</b>: moderation, wise use of energy.",
 "<b>Aparigraha</b>: non-greed, non-possessiveness."],
 qs:[
-C("The yamas are the first of Patanjali's eight limbs.",recall("Name the five yamas.","Ahimsa, Satya, Asteya, Brahmacharya, Aparigraha.")),
+C("The yamas are the first of Patanjali's eight limbs.",pick("Select the five yamas.",["Ahimsa", "Satya", "Asteya", "Brahmacharya", "Aparigraha"],["Saucha", "Tapas", "Santosha"])),
 C("The yamas are ethical guidelines for how we treat others and the world.",match("Match each yama to its meaning",[["Ahimsa","Non-violence"],["Satya","Truthfulness"],["Asteya","Non-stealing"],["Brahmacharya","Moderation"],["Aparigraha","Non-greed"]])),
 C("Gandhi made this yama central to his life and politics.",mc("Ahimsa means…",["Non-violence","Truthfulness","Contentment","Purity"])),
 C("This yama is about our relationship with possessions.",mc("Not taking more than you need is…",["Aparigraha","Satya","Saucha","Tapas"])),
@@ -319,7 +323,7 @@ notes:[
 "<b>Svadhyaya</b>: self-study, study of texts.",
 "<b>Ishvara pranidhana</b>: surrender to a higher power."],
 qs:[
-C("The niyamas are the second of the eight limbs.",recall("Name the five niyamas.","Saucha, Santosha, Tapas, Svadhyaya, Ishvara pranidhana.")),
+C("The niyamas are the second of the eight limbs.",pick("Select the five niyamas.",["Saucha", "Santosha", "Tapas", "Svadhyaya", "Ishvara pranidhana"],["Ahimsa", "Satya", "Aparigraha"])),
 C("The niyamas are personal practices for how we treat ourselves.",match("Match each niyama to its meaning",[["Saucha","Cleanliness"],["Santosha","Contentment"],["Tapas","Discipline"],["Svadhyaya","Self-study"],["Ishvara pranidhana","Surrender to a higher power"]])),
 C("One of the five niyamas, the second limb of yoga.",mc("Santosha means…",["Contentment","Cleanliness","Truthfulness","Discipline"])),
 C("One of the five niyamas, the personal observances.",mc("Svadhyaya means…",["Self-study","Surrender","Non-stealing","Concentration"])),
@@ -336,7 +340,7 @@ C("Together the eight limbs form Patanjali's path from the Yoga Sutras.",match("
 C("Patanjali's system from the Yoga Sutras, and also the name of a modern style of yoga.",mc("Ashtanga means…",["Eight limbs","Eight breaths","Eight postures","Eight chakras"])),
 C("This limb sits between the outer limbs and the inner ones.",mc("Which limb is withdrawal of the senses?",["Pratyahara","Pranayama","Dharana","Dhyana"])),
 C("The limbs build on each other, from the body towards the mind.",mc("Which limb comes straight after asana?",["Pranayama","Pratyahara","Niyama","Dharana"])),
-C("Patanjali's eight-limbed path from the Yoga Sutras.",recall("Name the eight limbs in order.","Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi."))
+C("Patanjali's eight-limbed path from the Yoga Sutras.",mc("Which limb comes just before samadhi?",["Dhyana", "Dharana", "Pratyahara", "Pranayama"]))
 ]},
 
 {id:"nadis",name:"Nadis",sk:"Nāḍī",
@@ -351,7 +355,7 @@ C("Prana is said to travel around the subtle body through these.",mc("Nadi means
 C("The three main nadis are linked to balancing the breath and energy.",match("Match each nadi to its description",[["Ida","Left, moon, cooling"],["Pingala","Right, sun, heating"],["Sushumna","Central, along the spine"]])),
 C("Hatha yoga texts describe a vast network of them.",mc("Traditionally, how many nadis are there?",["72,000","7","108","3"])),
 C("Kundalini energy is said to rise through this nadi.",mc("Which nadi runs up the centre of the spine?",["Sushumna","Ida","Pingala"])),
-C("Nadi shodhana, alternate nostril breathing, is designed to balance them.",recall("Name the three main nadis.","Ida (left, lunar), Pingala (right, solar), Sushumna (central)."))
+C("Nadi shodhana, alternate nostril breathing, is designed to balance them.",pick("Select the three main nadis.",["Ida", "Pingala", "Sushumna"],["Prana", "Apana", "Kundalini"]))
 ]},
 
 {id:"chakras",name:"Chakras (7)",sk:"Cakra",
@@ -373,7 +377,7 @@ C("Its name means “unstruck”, referring to a sound made without any striking
 C("Ida and pingala are said to meet at this chakra.",mc("Which chakra is the “third eye”?",["Ajna","Vishuddha","Anahata","Muladhara"])),
 C("The highest chakra, linked with pure consciousness.",mc("Which chakra is known as the thousand-petal lotus?",["Sahasrara (crown)","Ajna (third eye)","Anahata (heart)","Muladhara (root)"])),
 C("Its name means “thousand-petalled”; it is the highest of the seven.",mc("Where is Sahasrara?",["Crown of the head","Between the eyebrows","Throat","Base of the spine"])),
-C("It sits above the six main chakras.",recall("What is the seventh chakra, where is it, and what is it known as?","Sahasrara, the crown chakra, at the top of the head. It is known as the thousand-petal lotus."))
+C("It sits above the six main chakras.",mc("The seventh chakra is…",["Sahasrara, at the crown, the thousand-petal lotus", "Ajna, at the crown, the thousand-petal lotus", "Sahasrara, between the eyebrows, the two-petal lotus", "Vishuddha, at the throat, the thousand-petal lotus"]))
 ]},
 
 {id:"sutras",name:"Sutras 1.1, 1.2, 2.46",sk:"Yoga Sūtra",
@@ -388,9 +392,9 @@ C("This is the most famous definition of yoga.",mc("Which sutra says “Yoga is 
 C("The only instruction Patanjali gives about how to practise asana.",mc("“Sthira sukham asanam” means…",["Posture should be steady and comfortable","Now begins the teaching of yoga","Yoga is stilling the mind","Practise every day"])),
 C("Sutra 1.2 is Patanjali's definition of yoga.",mc("In sutra 1.2, “citta-vritti” means…",["The fluctuations of the mind","The breath","The postures","The teacher"])),
 C("From the sutra on asana: two qualities that balance each other.",mc("In sutra 2.46, “sthira” and “sukha” mean…",["Steady and comfortable","Strong and fast","Still and silent","Hot and cold"])),
-C("The opening line of the Yoga Sutras.",recall("Say sutra 1.1 in Sanskrit and English.","Atha yoga-anushasanam. “Now begins the teaching of yoga.”")),
-C("Patanjali's definition of yoga.",recall("Say sutra 1.2 in Sanskrit and English.","Yoga citta-vritti-nirodhah. “Yoga is the stilling of the fluctuations of the mind.”")),
-C("Patanjali's instruction on asana.",recall("Say sutra 2.46 in Sanskrit and English.","Sthira sukham asanam. “Posture should be steady and comfortable.”"))
+C("The opening line of the Yoga Sutras.",order("Build sutra 1.1 (“Now begins the teaching of yoga”) by tapping the words in order.",["Atha", "yoga", "anushasanam"])),
+C("Patanjali's definition of yoga.",order("Build sutra 1.2 (“Yoga is the stilling of the fluctuations of the mind”) by tapping the words in order.",["Yoga", "citta", "vritti", "nirodhah"])),
+C("Patanjali's instruction on asana.",order("Build sutra 2.46 (“Posture should be steady and comfortable”) by tapping the words in order.",["Sthira", "sukham", "asanam"]))
 ]},
 
 {id:"sk-core",name:"Sanskrit: core words",sk:"Saṁskṛta",
@@ -562,7 +566,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const best=()=>store.get("ytr-best",{});
 const topicById=id=>TOPICS.find(t=>t.id===id);
-const typeLabel={mc:"Multiple choice",match:"Matching",order:"Put in order",recall:"Recall"};
+const typeLabel={mc:"Multiple choice",match:"Matching",order:"Put in order",recall:"Recall",pick:"Select all"};
 
 let S=null;
 
@@ -634,7 +638,7 @@ function render(){
     </div>
   </div>`;
   $("#quit").onclick=()=>S.topicId?topicPage(S.topicId):home();
-  ({mc:renderMC,match:renderMatch,order:renderOrder,recall:renderRecall})[q.t](q);
+  ({mc:renderMC,match:renderMatch,order:renderOrder,recall:renderRecall,pick:renderPick})[q.t](q);
   window.scrollTo(0,0);
 }
 function finish(ok,html){
@@ -706,6 +710,28 @@ function renderOrder(q){
   draw();
 }
 
+function renderPick(q){
+  const all=shuffle([...q.r,...q.w]);const chosen=new Set();const need=q.r.length;
+  $("#body").innerHTML=`<p style="color:var(--muted)">Choose ${need}.</p>
+  <div class="pool picks" style="margin-top:10px">${all.map((o,k)=>`<button class="pk" data-k="${k}" aria-pressed="false">${esc(o)}</button>`).join("")}</div>
+  <div class="row" style="margin-top:14px"><button class="btn primary" id="check" disabled>Check answers</button><span class="eyebrow" id="cnt">0 of ${need} chosen</span></div>`;
+  const btns=[...document.querySelectorAll(".pk")];
+  btns.forEach(b=>b.onclick=()=>{
+    const k=+b.dataset.k;
+    if(chosen.has(k))chosen.delete(k);else if(chosen.size<need)chosen.add(k);
+    btns.forEach(x=>{const on=chosen.has(+x.dataset.k);x.classList.toggle("on",on);x.setAttribute("aria-pressed",on)});
+    $("#cnt").textContent=`${chosen.size} of ${need} chosen`;$("#check").disabled=chosen.size!==need;
+  });
+  $("#check").onclick=()=>{
+    let right=0;
+    btns.forEach(x=>{const v=all[+x.dataset.k],isR=q.r.includes(v),on=chosen.has(+x.dataset.k);x.disabled=true;x.classList.remove("on");
+      if(on&&isR){right++;x.classList.add("opt","correct")}else if(on)x.classList.add("opt","wrong");else if(isR)x.classList.add("missedpk")});
+    $("#check").parentElement.remove();
+    const ok=right===need;
+    finish(ok,`<strong>${ok?"All correct.":`${right} of ${need} correct.`}</strong>${ok?"":`<span>The answer: ${q.r.map(esc).join(", ")}</span>`}${expl(q)}`);
+  };
+}
+
 function renderRecall(q){
   $("#body").innerHTML=`<p style="color:var(--muted)">Say or write your answer, then reveal it and mark yourself honestly.</p>
   <div class="row" style="margin-top:12px"><button class="btn primary" id="show">Show answer</button></div>`;
@@ -722,6 +748,7 @@ function answerText(q){
   if(q.t==="mc")return q.o[0];
   if(q.t==="recall")return q.a;
   if(q.t==="order")return q.o.join(" → ");
+  if(q.t==="pick")return q.r.join(", ");
   return q.p.map(p=>`${p[0]}: ${p[1]}`).join(" · ");
 }
 function results(){
