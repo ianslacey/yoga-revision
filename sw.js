@@ -1,5 +1,5 @@
 // Offline support: keep a copy of the quiz and its fonts on the device.
-const CACHE = "yoga-revision-v9";
+const CACHE = "yoga-revision-v10";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
@@ -18,6 +18,9 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+
+  // Podcast audio streams with range requests; let the browser handle it directly.
+  if (url.pathname.endsWith(".mp3")) return;
 
   // The page itself: try the network first so updates arrive, fall back to the saved copy.
   if (req.mode === "navigate" || (url.origin === location.origin && url.pathname.endsWith(".html"))) {
