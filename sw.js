@@ -1,5 +1,5 @@
 // Offline support: keep a copy of the quiz and its fonts on the device.
-const CACHE = "yoga-revision-v10";
+const CACHE = "yoga-revision-v11";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
